@@ -143,7 +143,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year }) =>
                         <img src={DetailIcon} alt="Detail icon" className="Detail-icon" />
                         <div className="detail-name">Detail</div>
                     </div>
-                    <div className={`detail-sub-container ${isThreatActorOpen ? 'detail-sub-active' : ''}`}>
+                    <div className={`detail-sub-container ${selectedDetail ? 'detail-sub-active' : ''}`}>
                         <div className="detail-threat-row">
                             <div className="detail-threat-title">Threat Actor</div>
                             <div className="detail-threat-name">
