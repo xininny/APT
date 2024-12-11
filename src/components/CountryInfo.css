@@ -1,0 +1,343 @@
+.country-info {
+    font-family: 'Pretendard';
+    position: fixed;
+    right: 40px;
+    top: 107px;
+    width: 386px;
+}
+.year-overview-container {
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+.year-overview-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.year-overview-sub {
+    margin: 32px 40px 0px 40px;
+    display: flex;
+    align-items: center;
+}
+.Calendar-icon {
+    width: 19px;
+}
+.Year-Overview {
+    font-size: 19px;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 4px;
+    color: #333d4b;
+}
+.CountryInfo-year {
+    margin: 32px 40px 0px 0px;
+    font-size: 18px;
+    color: #333d4b;
+    font-weight: 500;
+}
+
+.year-overview {
+    justify-content: space-between;
+    margin: 20px 40px 0px 40px;
+}
+
+.Total-Attacks-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Total-Attacks {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.Total-times {
+    text-align: right;
+    color: #748aa1;
+    font-size: 15px;
+}
+.Zero-Day-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 32px;
+}
+
+.Zero-Day {
+    margin: 16px 0px 0px 0px;
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.Zero-Day-Count {
+    text-align: right;
+    color: #748aa1;
+}
+.Selected-Country-container {
+    margin-top: 8px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    height: 730px;
+}
+
+.Selected-Country-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Selected-Country-sub {
+    margin: 32px 40px 0px 40px;
+    display: flex;
+    align-items: center;
+}
+.Country-flag {
+    width: 19px;
+}
+.Selected-Country-name {
+    font-size: 19px;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 4px;
+    color: #333d4b;
+}
+
+.Selected-Country-times {
+    margin: 32px 40px 0px 0px;
+    color: #748aa1;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.SelectedCountry-detail-threat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.SelectedCountry-detail-text {
+    font-size: 18px;
+    color: #4e5968;
+}
+.SelectedCountry-detail-sub {
+    display: flex;
+    align-items: center;
+}
+.SelectedCountry-detail-length {
+    color: #748aa1;
+    text-align: right;
+    margin-right: 8px;
+}
+.dropdown-toggle {
+    align-items: center;
+}
+.dropdown-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+    position: relative;
+    align-items: center;
+    margin: 0px 0px 0px 0px;
+}
+
+.dropdown-toggle.open .dropdown-icon {
+    transform: rotate(-180deg);
+}
+
+.country-info button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.country-info .dropdown-content {
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.country-info .inline-content {
+    margin-left: 40px;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    color: #4e5968;
+}
+
+.SelectedCountry-detail-zeroday-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 40px 0px 40px;
+    color: #4e5968;
+}
+
+.SelectedCountry-detail-zeroday-text {
+    font-size: 18px;
+}
+
+.SelectedCountry-detail-zeroday-length {
+    color: #748aa1;
+    text-align: right;
+}
+.divider {
+    align-self: center;
+    margin: 32px 33px 0px 33px;
+    display: flex;
+    border-bottom: 1px solid #001b371a;
+    border-radius: 16px;
+    width: 319px;
+}
+.detail-title-sub {
+    margin: 32px 40px 0px 40px;
+    display: flex;
+    align-items: center;
+}
+.Detail-icon {
+    width: 19px;
+}
+.detail-name {
+    font-size: 19px;
+    margin-left: 4px;
+    color: #333d4b;
+    font-weight: 500;
+}
+.detail-sub-container {
+    overflow-y: hidden; /* 스크롤바 숨김 */
+    transition: max-height 0.3s ease; /* 부드러운 높이 변경 애니메이션 */
+}
+
+.detail-sub-container.detail-sub-active {
+    max-height: 330px;
+    overflow-y: auto; /* 스크롤 활성화 */
+}
+
+.detail-sub-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.detail-sub-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 29, 58, 0.18);
+    border-radius: 4px;
+}
+
+.detail-sub-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.detail-threat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.detail-threat-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.detail-threat-name {
+    color: #748aa1;
+    text-align: right;
+}
+
+.detail-threat-zeroday-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.detail-zeroday-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.detail-zeroday-count {
+    color: #748aa1;
+    text-align: right;
+}
+
+.detail-threat-cve-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.detail-threat-cve-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.detail-threat-cve-count {
+    color: #748aa1;
+    text-align: right;
+}
+
+.detail-threat-download-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.detail-threat-download-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.download-icon {
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+}
+
+.download-icon-disabled {
+    width: 19px;
+    height: 19px;
+    cursor: not-allowed;
+}
+
+.detail-threat-source-row,
+.detail-threat-timeline-row,
+.detail-threat-duration-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+
+.detail-threat-source-title,
+.detail-threat-timeline-title,
+.detail-threat-duration-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+
+.detail-threat-source-count,
+.detail-threat-timeline-name,
+.detail-threat-duration-name {
+    color: #748aa1;
+    text-align: right;
+}
+.detail-threat-initial-row,
+.detail-threat-malware-row,
+.detail-threat-targeted-row {
+    align-items: center;
+    margin: 20px 40px 0px 40px;
+}
+.detail-threat-initial-title,
+.detail-threat-malware-title,
+.detail-threat-targeted-title {
+    font-size: 18px;
+    color: #4e5968;
+}
+.detail-threat-initial-name,
+.detail-threat-malware-name,
+.detail-threat-targeted-name {
+    margin-top: 4px;
+    color: #748aa1;
+}
