@@ -61,6 +61,7 @@
     box-shadow: rgba(246, 247, 249) 0px 0px 0px 4px;
     position: relative;
     z-index: 2;
+    font-weight: 600;
 }
 
 .timeline-year {
