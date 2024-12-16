@@ -1,0 +1,114 @@
+.timeline-big-container {
+    background-color: #ffffff;
+    margin-top: 39px;
+    height: 903px;
+    left: 20px;
+    position: absolute;
+    width: 1880px;
+    border-radius: 16px;
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Pretendard';
+}
+
+.timeline {
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-line {
+    width: 2px;
+    height: 40px;
+    background-color: #c3c3c6;
+    position: absolute;
+    top: 40px;
+    left: 710px;
+}
+
+.timeline-content {
+    display: flex;
+    align-items: center;
+}
+
+.timeline-circle {
+    margin-left: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e5e8eb;
+    color: #748aa1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timeline-circle.selected {
+    background-color: #e5e8eb;
+    color: #748aa1;
+    box-shadow: rgba(246, 247, 249) 0px 0px 0px 4px;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-year {
+    width: 80px;
+    text-align: right;
+    font-weight: normal;
+    color: #000;
+    margin-left: 600px;
+}
+
+.timeline-year.selected-year {
+    font-weight: bold;
+    color: #000;
+}
+
+.articles-container {
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 24px;
+    height: 865px;
+    width: 1000px;
+}
+
+.articles-container div {
+    margin-bottom: 8px;
+    word-break: break-word;
+    line-height: 1.5;
+}
+.articles-img {
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+.articles-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.articles-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 29, 58, 0.18);
+    border-radius: 4px;
+}
+
+.articles-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.articles-year {
+    font-size: 17px;
+    font-weight: 600;
+}

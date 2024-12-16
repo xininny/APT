@@ -6,8 +6,9 @@ import CalendarIcon from './svg/Calendar.svg';
 import WorldIcon from './svg/World.svg';
 import DetailIcon from './svg/Detail.svg';
 
-const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year }) => {
+const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setYear, yearOptions }) => {
     const [isThreatActorOpen, setIsThreatActorOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedDetail, setSelectedDetail] = useState(null);
     const [currentCountry, setCurrentCountry] = useState('Country');
     const [currentFlag, setCurrentFlag] = useState(WorldIcon);
@@ -16,8 +17,14 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year }) =>
         const countryCode = country?.code || 'World';
         setCurrentCountry(country.name || 'Country');
         setCurrentFlag(`/Country/${countryCode}.svg`);
-        setSelectedDetail(null); // Detail 초기화
+        setSelectedDetail(null);
         setIsThreatActorOpen(false);
+        setIsDropdownOpen(false);
+    };
+
+    const handleYearSelect = (selectedYear) => {
+        setYear(selectedYear);
+        setIsDropdownOpen(false);
     };
 
     useEffect(() => {
@@ -39,8 +46,6 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year }) =>
         } else {
             setCurrentFlag(WorldIcon);
         }
-
-        // Detail 정보 초기화 (다른 나라를 클릭하거나, `selectedCountry`가 바뀌면 실행)
         setSelectedDetail(null);
     }, [selectedCountry]);
 
@@ -52,7 +57,28 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year }) =>
                         <img src={CalendarIcon} alt="Calendar icon" className="Calendar-icon" />
                         <div className="Year-Overview">Year Overview</div>
                     </div>
-                    <div className="CountryInfo-year">{year}</div>
+                    <div className="dropdown">
+                        <button
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            className={`dropdown-toggle-navbar ${isDropdownOpen ? 'open' : ''}`}
+                        >
+                            {year}
+                            <img src={DownIcon} alt="dropdown icon" className="dropdown-icon-navbar" />
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="dropdown-menu">
+                                {yearOptions.map((option) => (
+                                    <div
+                                        key={option}
+                                        className="dropdown-item"
+                                        onClick={() => handleYearSelect(option)}
+                                    >
+                                        {option}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
                 <div className="year-overview">
                     <div className="Total-Attacks-row">

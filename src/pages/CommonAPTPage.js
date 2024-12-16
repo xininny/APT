@@ -21,7 +21,7 @@ const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData 
 
             setAptData(jsonData);
 
-            const years = jsonData.map(item => new Date(item.Date).getFullYear());
+            const years = jsonData.map((item) => new Date(item.Date).getFullYear());
             const uniqueYears = [...new Set(years)];
             setYearOptions(uniqueYears.sort((a, b) => a - b));
             setYear(Math.min(...uniqueYears));
@@ -33,7 +33,7 @@ const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData 
 
     return (
         <div>
-            <Navbar year={year} setYear={setYear} yearOptions={yearOptions} />
+            <Navbar />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{ flex: 1 }}>
                     <MapChart
@@ -45,11 +45,13 @@ const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData 
                         onCountrySelect={setSelectedCountry}
                     />
                 </div>
-                <div style={{ flex: 1, marginLeft: '20px' }}>
+                <div>
                     <CountryInfo
                         selectedCountry={selectedCountry}
                         aptData={aptData}
                         year={year}
+                        setYear={setYear}
+                        yearOptions={yearOptions}
                         totalTimes={totalTimes}
                         zeroDayTrueCount={zeroDayTrueCount}
                     />
