@@ -1,36 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import { APTDataContext } from '../contexts/APTDataContext';
 import Navbar from '../components/Navbar';
 import MapChart from '../components/MapChart';
 import CountryInfo from '../components/CountryInfo';
 
 const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData }) => {
-    const [year, setYear] = useState(2014);
-    const [aptData, setAptData] = useState([]);
-    const [yearOptions, setYearOptions] = useState([]);
+    const { aptData, yearOptions, isLoading } = useContext(APTDataContext);
+    const [year, setYear] = useState(yearOptions.length ? Math.min(...yearOptions) : 2014);
     const [selectedCountry, setSelectedCountry] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://agreed-rebecca-xininny-c5532ae1.koyeb.app/get-apt-data');
-                const jsonData = await response.json();
-                if (response.ok) {
-                    setAptData(jsonData);
-
-                    const years = jsonData.map((item) => new Date(item.Date).getFullYear());
-                    const uniqueYears = [...new Set(years)];
-                    setYearOptions(uniqueYears.sort((a, b) => a - b));
-                    setYear(Math.min(...uniqueYears));
-                } else {
-                    console.error('Failed to fetch APT data:', jsonData.error);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     const { totalTimes, zeroDayTrueCount } = calculateData(aptData, year);
 
