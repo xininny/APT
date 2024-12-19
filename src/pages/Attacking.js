@@ -4,21 +4,25 @@ import CommonAPTPage from './CommonAPTPage';
 const Attacking = () => {
     const calculateData = (aptData, year) => {
         const yearData = aptData.filter((item) => new Date(item.Date).getFullYear() === year);
-        const countryData = {};
 
-        yearData.forEach((item) => {
-            const countries = item['Threat Country']?.split(/[,;]/).map((c) => c.trim());
-            if (countries) {
+        const countryTimes = yearData.reduce((acc, item) => {
+            if (item['Threat Country'] && item['Threat Country'] !== 'N/A') {
+                const countries = item['Threat Country']
+                    .split(/[,;]/)
+                    .map((c) => c.trim())
+                    .filter((c) => c);
                 countries.forEach((country) => {
-                    if (!countryData[country]) {
-                        countryData[country] = 0;
+                    if (!acc[country]) {
+                        acc[country] = 0;
                     }
-                    countryData[country] += 1;
+                    acc[country] += 1;
                 });
             }
-        });
+            return acc;
+        }, {});
 
-        const totalTimes = Object.values(countryData).reduce((acc, curr) => acc + curr, 0);
+        const totalTimes = Object.values(countryTimes).reduce((acc, count) => acc + count, 0);
+
         const zeroDayTrueCount = yearData.filter((item) => item['Zero-Day'] === 'True').length;
 
         return { totalTimes, zeroDayTrueCount };

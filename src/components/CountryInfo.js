@@ -210,7 +210,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         </div>
 
                         <div className="detail-threat-initial-row">
-                            <div className="detail-threat-initial-title">Initial Vector</div>
+                            <div className="detail-threat-initial-title">Attack Vector</div>
                             <div className="detail-threat-initial-name">
                                 {selectedDetail ? selectedDetail.initialVector : ' '}
                             </div>
