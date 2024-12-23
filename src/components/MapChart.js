@@ -49,7 +49,6 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
             let maxTimes = Math.max(...data.map((d) => d.value));
 
-            // 색상 및 투명도 계산 최적화
             data = data.map((d) => ({
                 ...d,
                 fill:
@@ -68,7 +67,6 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
                 onCountrySelect((prevSelectedCountry) => {
                     if (prevSelectedCountry && prevSelectedCountry.code === countryCode) {
-                        // 이전 선택 해제
                         if (lastSelectedPolygon) {
                             lastSelectedPolygon.stroke = am4core.color('#ffffff');
                             lastSelectedPolygon.strokeWidth = 1;

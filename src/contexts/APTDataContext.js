@@ -10,7 +10,7 @@ export const APTDataProvider = ({ children }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://agreed-rebecca-xininny-c5532ae1.koyeb.app/get-apt-data');
+                const response = await fetch('https://apt-backend-cb60223ac599.herokuapp.com/get-apt-data');
                 const jsonData = await response.json();
                 if (response.ok) {
                     setAptData(jsonData);

@@ -10,7 +10,6 @@ const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData 
     const [selectedCountry, setSelectedCountry] = useState(null);
 
     if (isLoading) {
-        return <div>Loading...</div>;
     }
 
     const { totalTimes, zeroDayTrueCount } = calculateData(aptData, year);
