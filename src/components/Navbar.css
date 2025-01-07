@@ -1,6 +1,5 @@
 .Navbar {
     font-family: 'Pretendard';
-    justify-content: space-between;
 }
 .logo-navbar {
     width: 30px;
@@ -8,9 +7,10 @@
 .Navbar-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     box-sizing: border-box;
-    margin: 38px 434px 0px 20px;
+    margin: 38px 0px 0px 20px;
+    gap: 1044px;
 }
 
 .Navbar-title {
