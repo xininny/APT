@@ -5,6 +5,7 @@ import DownloadIcon from './svg/Download.svg';
 import CalendarIcon from './svg/Calendar.svg';
 import WorldIcon from './svg/World.svg';
 import DetailIcon from './svg/Detail.svg';
+import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow'; // 올바른 import
 
 const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setYear, yearOptions }) => {
     const [isThreatActorOpen, setIsThreatActorOpen] = useState(false);
@@ -15,7 +16,9 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
 
     const handleCountrySelect = (country) => {
         const countryCode = country?.code || 'World';
-        setCurrentCountry(country.name || 'Country');
+        const countryName = getCountryName(countryCode); // 국가 이름 변환 함수 호출
+
+        setCurrentCountry(countryName); // 국가 이름 설정
         setCurrentFlag(`/Country/${countryCode}.svg`);
         setSelectedDetail(null);
         setIsThreatActorOpen(false);
@@ -26,11 +29,19 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
         setYear(selectedYear);
         setIsDropdownOpen(false);
     };
+    const getCountryName = (countryCode) => {
+        const feature = am4geodata_worldLow.features.find(
+            (f) => f.properties.id === countryCode // 국가 코드(id) 비교
+        );
+        return feature ? feature.properties.name : 'Country'; // 국가 이름 반환
+    };
 
     useEffect(() => {
         if (selectedCountry) {
             const countryCode = selectedCountry.code || 'World';
+            const countryName = getCountryName(countryCode); // 코드 → 이름 변환
             const flagPath = `/Country/${countryCode}.svg`;
+
             fetch(flagPath)
                 .then((response) => {
                     if (response.ok) {
@@ -39,14 +50,16 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         throw new Error(`Flag not found for country code: ${countryCode}`);
                     }
                 })
-                .catch((error) => {
-                    console.error(error.message);
+                .catch(() => {
                     setCurrentFlag(WorldIcon);
                 });
+
+            setCurrentCountry(countryName); // 국가 이름으로 설정
+            setSelectedDetail(null);
         } else {
             setCurrentFlag(WorldIcon);
+            setCurrentCountry('Country');
         }
-        setSelectedDetail(null);
     }, [selectedCountry]);
 
     return (
@@ -97,9 +110,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                 <div className="Selected-Country-row">
                     <div className="Selected-Country-sub">
                         <img src={currentFlag} alt={`${currentCountry} flag`} className="Country-flag" />
-                        <div className="Selected-Country-name">
-                            {selectedCountry ? selectedCountry.name : currentCountry}
-                        </div>
+                        <div className="Selected-Country-name">{currentCountry}</div>
                     </div>
                     <div className="Selected-Country-times">
                         {selectedCountry ? selectedCountry.times + ' times' : ''}
