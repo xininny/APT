@@ -1,7 +1,7 @@
 .country-info {
     font-family: 'Pretendard';
-    position: fixed;
-    right: 40px;
+    position: absolute;
+    left: 1496px;
     top: 107px;
     width: 386px;
 }

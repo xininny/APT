@@ -21,7 +21,6 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
             let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
             polygonSeries.useGeodata = true;
 
-            // 데이터 변환 작업 (필터링 및 매핑) 최적화
             let data = aptData.reduce((acc, item) => {
                 const itemYear = new Date(item.Date).getFullYear();
                 if (itemYear !== year) return acc;
@@ -36,7 +35,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                     } else {
                         acc.push({
                             id: countryCode,
-                            name: countryCode, // 초기값, 지도 데이터를 통해 이름 추가 예정
+                            name: countryCode,
                             value: 1,
                             fill: '#e5e8eb',
                             times: `1 time`,
@@ -68,8 +67,8 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                 onCountrySelect((prevSelectedCountry) => {
                     if (prevSelectedCountry && prevSelectedCountry.code === countryCode) {
                         if (lastSelectedPolygon) {
-                            lastSelectedPolygon.stroke = am4core.color('#ffffff');
-                            lastSelectedPolygon.strokeWidth = 1;
+                            lastSelectedPolygon.stroke = am4core.color('none');
+                            lastSelectedPolygon.strokeWidth = 0;
                             lastSelectedPolygon = null;
                         }
                         return null;
@@ -96,8 +95,8 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                             }));
 
                             if (lastSelectedPolygon) {
-                                lastSelectedPolygon.stroke = am4core.color('#ffffff');
-                                lastSelectedPolygon.strokeWidth = 1;
+                                lastSelectedPolygon.stroke = am4core.color('none');
+                                lastSelectedPolygon.strokeWidth = 0;
                             }
 
                             lastSelectedPolygon = event.target;
