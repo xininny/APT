@@ -20,6 +20,10 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
             let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
             polygonSeries.useGeodata = true;
+            const getCountryName = (countryCode) => {
+                const feature = am4geodata_worldLow.features.find((f) => f.properties.id === countryCode);
+                return feature ? feature.properties.name : countryCode; // 국가 이름 반환, 없으면 코드 표시
+            };
 
             let data = aptData.reduce((acc, item) => {
                 const itemYear = new Date(item.Date).getFullYear();
@@ -45,11 +49,23 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
                 return acc;
             }, []);
-
+            am4geodata_worldLow.features.forEach((feature) => {
+                const countryCode = feature.properties.id;
+                if (!data.find((d) => d.id === countryCode)) {
+                    data.push({
+                        id: countryCode,
+                        customName: feature.properties.name,
+                        value: 0,
+                        fill: '#e5e8eb',
+                        times: '0 times',
+                    });
+                }
+            });
             let maxTimes = Math.max(...data.map((d) => d.value));
 
             data = data.map((d) => ({
                 ...d,
+                customName: getCountryName(d.id),
                 fill:
                     d.value > 0 ? am4core.color(`rgba(${colorScale}, ${Math.min(1, d.value / maxTimes)})`) : '#e5e8eb',
                 times: `${d.value} ${d.value > 1 ? 'times' : 'time'}`,
@@ -57,7 +73,12 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
             polygonSeries.data = data;
             polygonSeries.mapPolygons.template.propertyFields.fill = 'fill';
-            polygonSeries.mapPolygons.template.tooltipText = '{name}: {times}';
+            polygonSeries.mapPolygons.template.tooltipText = '{customName}: {times}';
+            polygonSeries.tooltip.background.fill = am4core.color('#f0f0f0'); // 회색 배경
+            polygonSeries.tooltip.background.stroke = am4core.color('#cccccc'); // 테두리 색상
+            polygonSeries.tooltip.getFillFromObject = false; // 맵 색상에서 배경색 가져오지 않도록 설정
+            polygonSeries.tooltip.getStrokeFromObject = false; // 테두리 색상 상속 방지
+            polygonSeries.tooltip.label.fill = am4core.color('#000000'); // 글자 색 검정
 
             let lastSelectedPolygon = null;
 

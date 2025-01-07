@@ -77,8 +77,8 @@
 .Selected-Country-container {
     margin-top: 8px;
     background-color: #ffffff;
-    border-radius: 16px;
-    height: 730px;
+    border-radius: 16px 16px 0px 0px;
+    height: 250px;
 }
 
 .Selected-Country-row {
@@ -183,14 +183,18 @@
 }
 .divider {
     align-self: center;
-    margin: 32px 33px 0px 33px;
+    margin: 0px 33px 24px 33px;
     display: flex;
     border-bottom: 1px solid #001b371a;
     border-radius: 16px;
-    width: 319px;
+}
+.detail-container {
+    background-color: #ffffff;
+    border-radius: 0px 0px 16px 16px;
+    height: 478px;
 }
 .detail-title-sub {
-    margin: 32px 40px 0px 40px;
+    margin: 0px 40px 0px 40px;
     display: flex;
     align-items: center;
 }
@@ -209,7 +213,7 @@
 }
 
 .detail-sub-container.detail-sub-active {
-    max-height: 330px;
+    max-height: 410px;
     overflow-y: auto; /* 스크롤 활성화 */
 }
 
@@ -389,4 +393,22 @@
 .dropdown-item:hover {
     background-color: #0220470d;
     border-radius: 12px;
+}
+.dropdown-content {
+    max-height: 90px;
+    overflow-y: auto;
+    padding: 0px 0px 0px 8px;
+}
+
+.dropdown-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 29, 58, 0.18);
+    border-radius: 4px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+    background: transparent;
 }

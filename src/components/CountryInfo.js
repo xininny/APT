@@ -163,7 +163,8 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                             : ''}
                     </div>
                 </div>
-
+            </div>
+            <div className="detail-container">
                 <div className="divider"></div>
                 <div className="detail-section">
                     <div className="detail-title-sub">
