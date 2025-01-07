@@ -163,6 +163,20 @@
     word-break: break-word;
     white-space: normal;
     color: #4e5968;
+    line-height: 1.35;
+}
+.country-info .inline-content span {
+    padding: 1px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.country-info .inline-content span:hover {
+    background-color: #001b371a;
+}
+
+.country-info .inline-content span.active {
+    background-color: #001d3a2e;
 }
 
 .SelectedCountry-detail-zeroday-row {
@@ -208,12 +222,13 @@
     font-weight: 500;
 }
 .detail-sub-container {
+    margin-top: 20px;
     overflow-y: hidden; /* 스크롤바 숨김 */
     transition: max-height 0.3s ease; /* 부드러운 높이 변경 애니메이션 */
 }
 
 .detail-sub-container.detail-sub-active {
-    max-height: 410px;
+    max-height: 390px;
     overflow-y: auto; /* 스크롤 활성화 */
 }
 
@@ -234,7 +249,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 40px 0px 40px;
+    margin: 0px 40px 0px 40px;
 }
 
 .detail-threat-title {

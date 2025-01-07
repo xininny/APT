@@ -10,7 +10,7 @@
     justify-content: flex-start;
     box-sizing: border-box;
     margin: 38px 0px 0px 20px;
-    gap: 1044px;
+    gap: 1020px;
 }
 
 .Navbar-title {
@@ -32,10 +32,10 @@
 
 .Navbar-links a {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 19px;
     color: #333d4b;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .dropdown {

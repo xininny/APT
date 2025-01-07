@@ -13,9 +13,18 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const [selectedDetail, setSelectedDetail] = useState(null);
     const [currentCountry, setCurrentCountry] = useState('Country');
     const [currentFlag, setCurrentFlag] = useState(WorldIcon);
+    const [activeActor, setActiveActor] = useState(null); // 활성화된 Threat Actor 저장
     const getFlagPath = (countryCode) => {
         return `/Country/${countryCode}.svg`;
     };
+    const handleActorClick = (actor) => {
+        setActiveActor(actor); // 클릭한 Threat Actor를 활성화 상태로 설정
+        setSelectedDetail(actor); // 세부 정보 설정
+    };
+    const clearActiveActor = () => {
+        setActiveActor(null); // 활성화 상태 초기화
+    };
+
     const handleCountrySelect = (country) => {
         const countryCode = country?.code || 'World';
         const countryName = getCountryName(countryCode);
@@ -131,22 +140,21 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         <div className="inline-content">
                             {selectedCountry.details
                                 .filter((info) => info.threatActor && info.threatActor.trim() !== '')
-                                .map((info, index) => (
+                                .map((info, index, array) => (
                                     <span
                                         key={index}
-                                        onClick={() => setSelectedDetail(info)}
+                                        onClick={() => handleActorClick(info)} // 클릭 핸들러 추가
+                                        className={activeActor === info ? 'active' : ''} // 활성화 상태에 따라 클래스 추가
                                         style={{ cursor: 'pointer' }}
                                     >
                                         {info.threatActor}
-                                        {index <
-                                        selectedCountry.details.filter(
-                                            (info) => info.threatActor && info.threatActor.trim() !== ''
-                                        ).length -
-                                            1
-                                            ? ', '
-                                            : ''}
                                     </span>
-                                ))}
+                                ))
+                                .reduce(
+                                    (prev, curr, index, array) =>
+                                        index < array.length - 1 ? [...prev, curr, ', '] : [...prev, curr],
+                                    []
+                                )}
                         </div>
                     </div>
                 )}
