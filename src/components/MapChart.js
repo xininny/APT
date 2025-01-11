@@ -63,22 +63,32 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
             });
             let maxTimes = Math.max(...data.map((d) => d.value));
 
-            data = data.map((d) => ({
-                ...d,
-                customName: getCountryName(d.id),
-                fill:
-                    d.value > 0 ? am4core.color(`rgba(${colorScale}, ${Math.min(1, d.value / maxTimes)})`) : '#e5e8eb',
-                times: `${d.value} ${d.value > 1 ? 'times' : 'time'}`,
-            }));
+            data = data.map((d) => {
+                const countryData = aptData.filter((item) => {
+                    const itemYear = new Date(item.Date).getFullYear();
+                    const countries = item[filterColumn]?.split(/[,;]/).map((c) => c.trim());
+                    return countries && countries.includes(d.id) && itemYear === year;
+                });
+
+                return {
+                    ...d,
+                    customName: getCountryName(d.id),
+                    fill:
+                        d.value > 0
+                            ? am4core.color(`rgba(${colorScale}, ${Math.max(0.1, Math.min(1, d.value / maxTimes))})`)
+                            : '#e5e8eb',
+                    times: `${countryData.length} ${countryData.length > 1 ? 'times' : 'time'}`, // 필터링된 데이터 기준
+                };
+            });
 
             polygonSeries.data = data;
             polygonSeries.mapPolygons.template.propertyFields.fill = 'fill';
             polygonSeries.mapPolygons.template.tooltipText = '{customName}: {times}';
-            polygonSeries.tooltip.background.fill = am4core.color('#f0f0f0'); // 회색 배경
-            polygonSeries.tooltip.background.stroke = am4core.color('#cccccc'); // 테두리 색상
-            polygonSeries.tooltip.getFillFromObject = false; // 맵 색상에서 배경색 가져오지 않도록 설정
-            polygonSeries.tooltip.getStrokeFromObject = false; // 테두리 색상 상속 방지
-            polygonSeries.tooltip.label.fill = am4core.color('#000000'); // 글자 색 검정
+            polygonSeries.tooltip.background.fill = am4core.color('#0220470d'); // 회색 배경
+            // polygonSeries.tooltip.background.stroke = am4core.color('#cccccc'); // 테두리 색상
+            // polygonSeries.tooltip.background.strokeWidth = 1; // 테두리 두께 1px 설정
+            polygonSeries.tooltip.getFillFromObject = false;
+            polygonSeries.tooltip.label.fill = am4core.color('#000000');
 
             let lastSelectedPolygon = null;
 
@@ -103,7 +113,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                         if (countryData.length > 0) {
                             const countryInfoArray = countryData.map((data) => ({
                                 threatActor: data['Threat Actor'],
-                                zeroDay: data['Zero-Day'],
+                                zeroDay: data['Zero-Day'], // Boolean 값 그대로 전달
                                 isHash: data['IsHash'] && data['IsHash'].toLowerCase() === 'true' ? 'True' : 'False',
                                 downloadUrl: data['Download Url'],
                                 source: data['Source'],

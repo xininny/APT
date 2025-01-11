@@ -13,16 +13,124 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const [selectedDetail, setSelectedDetail] = useState(null);
     const [currentCountry, setCurrentCountry] = useState('Country');
     const [currentFlag, setCurrentFlag] = useState(WorldIcon);
-    const [activeActor, setActiveActor] = useState(null); // 활성화된 Threat Actor 저장
+    const [activeActor, setActiveActor] = useState(null);
     const getFlagPath = (countryCode) => {
         return `/Country/${countryCode}.svg`;
     };
     const handleActorClick = (actor) => {
-        setActiveActor(actor); // 클릭한 Threat Actor를 활성화 상태로 설정
-        setSelectedDetail(actor); // 세부 정보 설정
+        setActiveActor(actor);
+        setSelectedDetail(actor);
     };
     const clearActiveActor = () => {
-        setActiveActor(null); // 활성화 상태 초기화
+        setActiveActor(null);
+    };
+    const formatDuration = (duration) => {
+        if (!duration || duration === 'N/A') return 'N/A';
+
+        const match = duration.match(/\d+/); // 숫자만 추출
+        if (match) {
+            return `${match[0]} days`; // 숫자에 'days' 붙여 반환
+        }
+
+        return 'N/A'; // 숫자 없으면 'N/A' 반환
+    };
+
+    const parseTimeline = (timeline) => {
+        if (!timeline || timeline === 'N/A' || timeline.toLowerCase() === 'not mentioned') {
+            return { startDate: 'N/A', endDate: 'N/A' };
+        }
+
+        // 1. 기존 포맷 처리: 'Start date: ... End date: ...'
+        const matches = timeline.match(/Start date:\s?(.+?)\s?End date:\s?(.+)/i);
+        if (matches) {
+            const startDate = formatDate(matches[1].trim());
+            const endDate = formatDate(matches[2].trim());
+            return {
+                startDate: startDate || 'N/A',
+                endDate: endDate || 'N/A',
+            };
+        }
+
+        // 2. 새로운 포맷 처리: 'April 2014 - May 2014'
+        const rangeMatch = timeline.match(/(.+?)\s?-\s?(.+)/);
+        if (rangeMatch) {
+            const startDate = formatDate(rangeMatch[1].trim());
+            const endDate = formatDate(rangeMatch[2].trim());
+            return {
+                startDate: startDate || 'N/A',
+                endDate: endDate || 'N/A',
+            };
+        }
+
+        // 3. 시작일만 있는 경우: 'Start date: April 2014'
+        const startMatch = timeline.match(/Start date:\s?(.+)/i);
+        if (startMatch) {
+            const startDate = formatDate(startMatch[1].trim());
+            return { startDate: startDate || 'N/A', endDate: 'N/A' };
+        }
+
+        // 4. 처리 불가한 경우
+        return { startDate: 'N/A', endDate: 'N/A' };
+    };
+
+    const formatDate = (dateStr) => {
+        if (!dateStr || dateStr === 'N/A' || dateStr.toLowerCase() === 'not mentioned') return 'N/A';
+
+        const months = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+
+        // 'YYYY-MM-DD' 형식 (예: '2023-12-15')
+        if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            const [year, month, day] = dateStr.split('-');
+            return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
+        }
+
+        // 'YYYY-MM' 형식 (예: '2023-09')
+        if (dateStr.match(/^\d{4}-\d{2}$/)) {
+            const [year, month] = dateStr.split('-');
+            return `${months[parseInt(month) - 1]} ${year}`;
+        }
+
+        // 'Month YYYY' 형식 (예: 'September 2023')
+        if (dateStr.match(/^\w+\s\d{4}$/)) {
+            return dateStr;
+        }
+
+        // 'YYYY' 형식 (예: '2022')
+        if (dateStr.match(/^\d{4}$/)) {
+            return dateStr;
+        }
+
+        // 'Month Day, Year' 형식 (예: 'July 7, 2015')
+        const matchMDY = dateStr.match(/^(\w+)\s+(\d{1,2}),\s*(\d{4})$/);
+        if (matchMDY) {
+            const [, month, day, year] = matchMDY;
+            return `${parseInt(day)} ${month} ${year}`;
+        }
+
+        // 'Early September 2023', 'Late June 2022' 처리
+        const pattern = /(early|mid|late)?[-\s]?(\w+)?\s?(\d{4})/i;
+        const match = dateStr.match(pattern);
+        if (match) {
+            const [, prefix, month, year] = match;
+            let formattedMonth = month ? `${month.charAt(0).toUpperCase()}${month.slice(1).toLowerCase()}` : '';
+            let formattedPrefix = prefix ? `${prefix.charAt(0).toUpperCase()}${prefix.slice(1).toLowerCase()} ` : '';
+            return `${formattedPrefix}${formattedMonth} ${year}`;
+        }
+
+        return 'N/A'; // 변환할 수 없는 경우 'N/A'
     };
 
     const handleCountrySelect = (country) => {
@@ -143,8 +251,8 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                                 .map((info, index, array) => (
                                     <span
                                         key={index}
-                                        onClick={() => handleActorClick(info)} // 클릭 핸들러 추가
-                                        className={activeActor === info ? 'active' : ''} // 활성화 상태에 따라 클래스 추가
+                                        onClick={() => handleActorClick(info)}
+                                        className={activeActor === info ? 'active' : ''}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         {info.threatActor}
@@ -162,13 +270,8 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                 <div className="SelectedCountry-detail-zeroday-row">
                     <div className="SelectedCountry-detail-zeroday-text">Zero-Day T/F</div>
                     <div className="SelectedCountry-detail-zeroday-length">
-                        {selectedCountry
-                            ? selectedCountry.details.filter((info) => info.zeroDay === 'True').length
-                            : ''}{' '}
-                        /{' '}
-                        {selectedCountry
-                            ? selectedCountry.details.filter((info) => info.zeroDay === 'False').length
-                            : ''}
+                        {selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay === true).length : 0} /
+                        {selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay === false).length : 0}
                     </div>
                 </div>
             </div>
@@ -186,10 +289,11 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                                 {selectedDetail ? selectedDetail.threatActor : 'Select a threat actor'}
                             </div>
                         </div>
-
                         <div className="detail-threat-zeroday-row">
                             <div className="detail-zeroday-title">Zero-Day</div>
-                            <div className="detail-zeroday-count">{selectedDetail ? selectedDetail.zeroDay : ' '}</div>
+                            <div className="detail-zeroday-count">
+                                {selectedDetail ? (selectedDetail.zeroDay === true ? 'True' : 'False') : ' '}
+                            </div>
                         </div>
 
                         <div className="detail-threat-cve-row">
@@ -198,24 +302,26 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                                 {selectedDetail ? selectedDetail.CVE || ' ' : ' '}
                             </div>
                         </div>
-
                         <div className="detail-threat-download-row">
-                            <div className="detail-threat-download-title">Download URL</div>
-                            <div>
-                                {selectedDetail ? (
-                                    <a href={selectedDetail.downloadUrl} target="_blank" rel="noopener noreferrer">
-                                        <img src={DownloadIcon} alt="Download icon" className="download-icon" />
-                                    </a>
-                                ) : (
-                                    <img src={DownloadIcon} alt="Download icon" className="download-icon-disabled" />
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="detail-threat-source-row">
-                            <div className="detail-threat-source-title">Source</div>
-                            <div className="detail-threat-source-count">
-                                {selectedDetail ? selectedDetail.source : ' '}
+                            <div className="detail-threat-download-title">Source</div>
+                            <div className="detail-threat-download-sub-row">
+                                <div className="detail-threat-source-count">
+                                    {selectedDetail ? selectedDetail.source : ' '}
+                                </div>
+                                <div
+                                    className={
+                                        selectedDetail && selectedDetail.downloadUrl
+                                            ? 'download-icon'
+                                            : 'download-icon-disabled'
+                                    }
+                                    onClick={() => {
+                                        if (selectedDetail && selectedDetail.downloadUrl) {
+                                            window.open(selectedDetail.downloadUrl, '_blank', 'noopener,noreferrer');
+                                        }
+                                    }}
+                                >
+                                    <img src={DownloadIcon} alt="Download icon" className="download-icon-img" />
+                                </div>
                             </div>
                         </div>
 
@@ -225,33 +331,32 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                                 {selectedDetail ? selectedDetail.initialVector : ' '}
                             </div>
                         </div>
-
                         <div className="detail-threat-malware-row">
                             <div className="detail-threat-malware-title">Malware</div>
                             <div className="detail-threat-malware-name">
                                 {selectedDetail ? selectedDetail.malware : ' '}
                             </div>
                         </div>
-
-                        <div className="detail-threat-timeline-row">
-                            <div className="detail-threat-timeline-title">Timeline</div>
-                            <div className="detail-threat-timeline-name">
-                                {selectedDetail ? selectedDetail.timeline : ' '}
-                            </div>
-                        </div>
-
                         <div className="detail-threat-targeted-row">
                             <div className="detail-threat-targeted-title">Targeted Sectors</div>
                             <div className="detail-threat-targeted-name">
                                 {selectedDetail ? selectedDetail.targetedSectors : ' '}
                             </div>
                         </div>
-
-                        <div className="detail-threat-duration-row">
-                            <div className="detail-threat-duration-title">Duration</div>
-                            <div className="detail-threat-duration-name">
-                                {selectedDetail ? selectedDetail.duration : ' '}
-                            </div>
+                        <div className="detail-threat-timeline-row">
+                            <div className="detail-threat-timeline-title">Timeline (Duration)</div>
+                            {selectedDetail && selectedDetail.timeline ? (
+                                <div className="detail-threat-timeline-name">
+                                    {(() => {
+                                        const { startDate, endDate } = parseTimeline(selectedDetail.timeline);
+                                        if (!startDate && !endDate) return '';
+                                        if (!startDate) return `~ ${endDate}`;
+                                        if (!endDate) return `${startDate} ~`;
+                                        return `${startDate} ~ ${endDate}`;
+                                    })()}{' '}
+                                    {selectedDetail.duration ? `(${formatDuration(selectedDetail.duration)})` : ''}
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                 </div>

@@ -278,50 +278,36 @@
     color: #748aa1;
     text-align: right;
 }
-
-.detail-threat-cve-row {
+.detail-threat-download-sub-row {
+    display: flex; /* 가로 배치 설정 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+.download-icon {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 20px 40px 0px 40px;
+    width: 19px;
+    height: 19px;
+    cursor: pointer;
+    margin-left: 8px;
 }
-
-.detail-threat-cve-title {
-    font-size: 18px;
-    color: #4e5968;
+.download-icon-img {
+    width: 19px;
 }
-
-.detail-threat-cve-count {
+.download-icon-disabled {
+    width: 19px;
+    height: 19px;
+    cursor: not-allowed;
+}
+.detail-threat-source-count {
     color: #748aa1;
-    text-align: right;
 }
-
 .detail-threat-download-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 20px 40px 0px 40px;
 }
-
-.detail-threat-download-title {
-    font-size: 18px;
-    color: #4e5968;
-}
-
-.download-icon {
-    width: 19px;
-    height: 19px;
-    cursor: pointer;
-}
-
-.download-icon-disabled {
-    width: 19px;
-    height: 19px;
-    cursor: not-allowed;
-}
-
 .detail-threat-source-row,
-.detail-threat-timeline-row,
 .detail-threat-duration-row {
     display: flex;
     justify-content: space-between;
@@ -330,33 +316,37 @@
 }
 
 .detail-threat-source-title,
-.detail-threat-timeline-title,
 .detail-threat-duration-title {
     font-size: 18px;
     color: #4e5968;
 }
 
-.detail-threat-source-count,
-.detail-threat-timeline-name,
 .detail-threat-duration-name {
     color: #748aa1;
     text-align: right;
 }
 .detail-threat-initial-row,
 .detail-threat-malware-row,
-.detail-threat-targeted-row {
+.detail-threat-targeted-row,
+.detail-threat-timeline-row,
+.detail-threat-cve-row {
     align-items: center;
     margin: 20px 40px 0px 40px;
 }
 .detail-threat-initial-title,
 .detail-threat-malware-title,
-.detail-threat-targeted-title {
+.detail-threat-targeted-title,
+.detail-threat-timeline-title,
+.detail-threat-download-title,
+.detail-threat-cve-title {
     font-size: 18px;
     color: #4e5968;
 }
 .detail-threat-initial-name,
 .detail-threat-malware-name,
-.detail-threat-targeted-name {
+.detail-threat-targeted-name,
+.detail-threat-timeline-name,
+.detail-threat-cve-count {
     margin-top: 4px;
     color: #748aa1;
 }
