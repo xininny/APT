@@ -14,6 +14,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const [currentCountry, setCurrentCountry] = useState('Country');
     const [currentFlag, setCurrentFlag] = useState(WorldIcon);
     const [activeActor, setActiveActor] = useState(null);
+
     const getFlagPath = (countryCode) => {
         return `/Country/${countryCode}.svg`;
     };
@@ -27,12 +28,12 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const formatDuration = (duration) => {
         if (!duration || duration === 'N/A') return 'N/A';
 
-        const match = duration.match(/\d+/); // 숫자만 추출
+        const match = duration.match(/\d+/);
         if (match) {
-            return `${match[0]} days`; // 숫자에 'days' 붙여 반환
+            return `${match[0]} days`;
         }
 
-        return 'N/A'; // 숫자 없으면 'N/A' 반환
+        return 'N/A';
     };
 
     const parseTimeline = (timeline) => {
@@ -40,7 +41,6 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             return { startDate: 'N/A', endDate: 'N/A' };
         }
 
-        // 1. 기존 포맷 처리: 'Start date: ... End date: ...'
         const matches = timeline.match(/Start date:\s?(.+?)\s?End date:\s?(.+)/i);
         if (matches) {
             const startDate = formatDate(matches[1].trim());
@@ -51,7 +51,6 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             };
         }
 
-        // 2. 새로운 포맷 처리: 'April 2014 - May 2014'
         const rangeMatch = timeline.match(/(.+?)\s?-\s?(.+)/);
         if (rangeMatch) {
             const startDate = formatDate(rangeMatch[1].trim());
@@ -62,14 +61,12 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             };
         }
 
-        // 3. 시작일만 있는 경우: 'Start date: April 2014'
         const startMatch = timeline.match(/Start date:\s?(.+)/i);
         if (startMatch) {
             const startDate = formatDate(startMatch[1].trim());
             return { startDate: startDate || 'N/A', endDate: 'N/A' };
         }
 
-        // 4. 처리 불가한 경우
         return { startDate: 'N/A', endDate: 'N/A' };
     };
 
@@ -91,36 +88,29 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             'December',
         ];
 
-        // 'YYYY-MM-DD' 형식 (예: '2023-12-15')
         if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
             const [year, month, day] = dateStr.split('-');
             return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
         }
 
-        // 'YYYY-MM' 형식 (예: '2023-09')
         if (dateStr.match(/^\d{4}-\d{2}$/)) {
             const [year, month] = dateStr.split('-');
             return `${months[parseInt(month) - 1]} ${year}`;
         }
-
-        // 'Month YYYY' 형식 (예: 'September 2023')
         if (dateStr.match(/^\w+\s\d{4}$/)) {
             return dateStr;
         }
 
-        // 'YYYY' 형식 (예: '2022')
         if (dateStr.match(/^\d{4}$/)) {
             return dateStr;
         }
 
-        // 'Month Day, Year' 형식 (예: 'July 7, 2015')
         const matchMDY = dateStr.match(/^(\w+)\s+(\d{1,2}),\s*(\d{4})$/);
         if (matchMDY) {
             const [, month, day, year] = matchMDY;
             return `${parseInt(day)} ${month} ${year}`;
         }
 
-        // 'Early September 2023', 'Late June 2022' 처리
         const pattern = /(early|mid|late)?[-\s]?(\w+)?\s?(\d{4})/i;
         const match = dateStr.match(pattern);
         if (match) {
@@ -130,7 +120,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             return `${formattedPrefix}${formattedMonth} ${year}`;
         }
 
-        return 'N/A'; // 변환할 수 없는 경우 'N/A'
+        return 'N/A';
     };
 
     const handleCountrySelect = (country) => {

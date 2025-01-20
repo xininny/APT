@@ -77,7 +77,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                         d.value > 0
                             ? am4core.color(`rgba(${colorScale}, ${Math.max(0.1, Math.min(1, d.value / maxTimes))})`)
                             : '#e5e8eb',
-                    times: `${countryData.length} ${countryData.length > 1 ? 'times' : 'time'}`, // 필터링된 데이터 기준
+                    times: `${countryData.length} ${countryData.length > 1 ? 'times' : 'time'}`,
                 };
             });
 
