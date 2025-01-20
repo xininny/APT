@@ -176,15 +176,17 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         </button>
                         {isDropdownOpen && (
                             <div className="dropdown-menu">
-                                {yearOptions.map((option) => (
-                                    <div
-                                        key={option}
-                                        className="dropdown-item"
-                                        onClick={() => handleYearSelect(option)}
-                                    >
-                                        {option}
-                                    </div>
-                                ))}
+                                {[...yearOptions]
+                                    .sort((a, b) => b - a)
+                                    .map((option) => (
+                                        <div
+                                            key={option}
+                                            className="dropdown-item"
+                                            onClick={() => handleYearSelect(option)}
+                                        >
+                                            {option}
+                                        </div>
+                                    ))}
                             </div>
                         )}
                     </div>
