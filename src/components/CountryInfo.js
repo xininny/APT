@@ -38,25 +38,9 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
             return { startDate: 'N/A', endDate: 'N/A' };
         }
 
-        // ✅ `Start Date` 및 `End Date`가 개별 속성으로 존재하는 경우
-        const startDate = detail['Start Date'] || 'N/A';
-        const endDate = detail['End Date'] || 'N/A';
-
-        // ✅ 기존 `timeline` 속성이 객체라면 "Start Date"와 "End Date"를 가져옴
-        if (typeof detail.timeline === 'object' && detail.timeline['Start Date'] && detail.timeline['End Date']) {
-            return {
-                startDate: detail.timeline['Start Date'],
-                endDate: detail.timeline['End Date'],
-            };
-        }
-
-        // ✅ `timeline` 속성이 문자열 형식이라면 정규식으로 날짜 추출
-        if (typeof detail.timeline === 'string') {
-            const rangeMatch = detail.timeline.match(/^(\d{4}-\d{2}-\d{2})\s?-\s?(\d{4}-\d{2}-\d{2})$/);
-            if (rangeMatch) {
-                return { startDate: rangeMatch[1], endDate: rangeMatch[2] };
-            }
-        }
+        // ✅ Start Date 및 End Date가 개별 속성으로 존재하는 경우
+        const startDate = detail.startDate || 'N/A';
+        const endDate = detail.endDate || 'N/A';
 
         return { startDate, endDate };
     };
@@ -286,7 +270,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
 
                                         return `${startDate} ~ ${endDate}`;
                                     })()}{' '}
-                                    {selectedDetail.duration ? `(${selectedDetail.duration} days)` : ''}
+                                    {selectedDetail.duration ? `(${selectedDetail.duration})` : ''}
                                 </div>
                             ) : null}
                         </div>
