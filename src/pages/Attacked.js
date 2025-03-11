@@ -3,6 +3,7 @@ import CommonAPTPage from './CommonAPTPage';
 
 const Attacked = () => {
     const calculateData = (aptData, year) => {
+        // ✅ 해당 연도의 데이터 필터링
         const yearData = aptData.filter((item) => new Date(item.Date).getFullYear() === year);
 
         const victimStats = yearData.reduce(
@@ -13,8 +14,8 @@ const Attacked = () => {
                         .map((v) => v.trim())
                         .filter((v) => v);
 
-                    // ✅ Zero-Day True 개수를 Victims이 존재하는 경우에만 카운트
-                    if (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE') {
+                    // ✅ Victims이 존재하고 Zero-Day가 True인 경우만 카운트
+                    if (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True') {
                         acc.zeroDayTrueCount += victims.length;
                     }
 
@@ -27,6 +28,7 @@ const Attacked = () => {
 
         return victimStats;
     };
+
     return (
         <CommonAPTPage
             filterColumn="Victims"
