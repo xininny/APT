@@ -113,7 +113,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                         if (countryData.length > 0) {
                             const countryInfoArray = countryData.map((data) => ({
                                 threatActor: data['Threat Actor'],
-                                zeroDay: data['Zero-Day'], // Boolean 값 그대로 전달
+                                zeroDay: data['Zero-Day'],
                                 isHash: data['IsHash'] && data['IsHash'].toLowerCase() === 'true' ? 'True' : 'False',
                                 downloadUrl: data['Download Url'],
                                 source: data['Source'],
