@@ -116,9 +116,11 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                 zeroDay:
                                     data['Zero-Day'] === 'N/A'
                                         ? 'N/A'
-                                        : data['Zero-Day'] === true || data['Zero-Day']?.toLowerCase() === 'true'
+                                        : typeof data['Zero-Day'] === 'string' &&
+                                          data['Zero-Day'].toLowerCase() === 'true'
                                         ? true
-                                        : false,
+                                        : Boolean(data['Zero-Day']),
+
                                 isHash: data['IsHash'] && data['IsHash'].toLowerCase() === 'true' ? 'True' : 'False',
                                 downloadUrl: data['Download Url'],
                                 source: data['Source'],
