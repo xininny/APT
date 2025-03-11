@@ -25,102 +25,49 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const clearActiveActor = () => {
         setActiveActor(null);
     };
+
     const formatDuration = (duration) => {
-        if (!duration || duration === 'N/A') return 'N/A';
+        if (typeof duration !== 'string' || duration === 'N/A') return 'N/A';
 
         const match = duration.match(/\d+/);
-        if (match) {
-            return `${match[0]} days`;
-        }
-
-        return 'N/A';
+        return match ? `${match[0]} days` : 'N/A';
     };
 
     const parseTimeline = (timeline) => {
-        if (!timeline || timeline === 'N/A' || timeline.toLowerCase() === 'not mentioned') {
+        if (!timeline) {
             return { startDate: 'N/A', endDate: 'N/A' };
         }
 
-        const matches = timeline.match(/Start date:\s?(.+?)\s?End date:\s?(.+)/i);
-        if (matches) {
-            const startDate = formatDate(matches[1].trim());
-            const endDate = formatDate(matches[2].trim());
+        // ✅ Case 1: 객체 타입 {"Start Date": "YYYY-MM-DD", "End Date": "YYYY-MM-DD"}
+        if (typeof timeline === 'object') {
+            const { 'Start Date': startDate, 'End Date': endDate } = timeline;
+            const isValidDate = (date) => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date);
+
             return {
-                startDate: startDate || 'N/A',
-                endDate: endDate || 'N/A',
+                startDate: isValidDate(startDate) ? startDate : 'N/A',
+                endDate: isValidDate(endDate) ? endDate : 'N/A',
             };
         }
 
-        const rangeMatch = timeline.match(/(.+?)\s?-\s?(.+)/);
-        if (rangeMatch) {
-            const startDate = formatDate(rangeMatch[1].trim());
-            const endDate = formatDate(rangeMatch[2].trim());
+        // ✅ Case 2: 문자열 타입 "YYYY-MM-DD - YYYY-MM-DD"
+        if (typeof timeline === 'string') {
+            const rangeMatch = timeline.match(/^(\d{4}-\d{2}-\d{2})\s?-\s?(\d{4}-\d{2}-\d{2})$/);
+            if (rangeMatch) {
+                return { startDate: rangeMatch[1], endDate: rangeMatch[2] };
+            }
+
+            // ✅ Case 3: "Start date: YYYY-MM-DD, End date: YYYY-MM-DD" 형태의 문자열 처리
+            const startMatch = timeline.match(/Start date:\s?(\d{4}-\d{2}-\d{2})/i);
+            const endMatch = timeline.match(/End date:\s?(\d{4}-\d{2}-\d{2})/i);
+
             return {
-                startDate: startDate || 'N/A',
-                endDate: endDate || 'N/A',
+                startDate: startMatch ? startMatch[1] : 'N/A',
+                endDate: endMatch ? endMatch[1] : 'N/A',
             };
         }
 
-        const startMatch = timeline.match(/Start date:\s?(.+)/i);
-        if (startMatch) {
-            const startDate = formatDate(startMatch[1].trim());
-            return { startDate: startDate || 'N/A', endDate: 'N/A' };
-        }
-
+        // ✅ 예상하지 못한 데이터 형식은 기본값 반환
         return { startDate: 'N/A', endDate: 'N/A' };
-    };
-
-    const formatDate = (dateStr) => {
-        if (!dateStr || dateStr === 'N/A' || dateStr.toLowerCase() === 'not mentioned') return 'N/A';
-
-        const months = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-        ];
-
-        if (dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
-            const [year, month, day] = dateStr.split('-');
-            return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
-        }
-
-        if (dateStr.match(/^\d{4}-\d{2}$/)) {
-            const [year, month] = dateStr.split('-');
-            return `${months[parseInt(month) - 1]} ${year}`;
-        }
-        if (dateStr.match(/^\w+\s\d{4}$/)) {
-            return dateStr;
-        }
-
-        if (dateStr.match(/^\d{4}$/)) {
-            return dateStr;
-        }
-
-        const matchMDY = dateStr.match(/^(\w+)\s+(\d{1,2}),\s*(\d{4})$/);
-        if (matchMDY) {
-            const [, month, day, year] = matchMDY;
-            return `${parseInt(day)} ${month} ${year}`;
-        }
-
-        const pattern = /(early|mid|late)?[-\s]?(\w+)?\s?(\d{4})/i;
-        const match = dateStr.match(pattern);
-        if (match) {
-            const [, prefix, month, year] = match;
-            let formattedMonth = month ? `${month.charAt(0).toUpperCase()}${month.slice(1).toLowerCase()}` : '';
-            let formattedPrefix = prefix ? `${prefix.charAt(0).toUpperCase()}${prefix.slice(1).toLowerCase()} ` : '';
-            return `${formattedPrefix}${formattedMonth} ${year}`;
-        }
-
-        return 'N/A';
     };
 
     const handleCountrySelect = (country) => {
