@@ -184,8 +184,11 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                 <div className="SelectedCountry-detail-zeroday-row">
                     <div className="SelectedCountry-detail-zeroday-text">Zero-Day True/Total</div>
                     <div className="SelectedCountry-detail-zeroday-length">
-                        {selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay === true).length : 0} /{' '}
-                        {selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay).length : 0}
+                        {selectedCountry
+                            ? selectedCountry.details.filter((info) => info.zeroDay !== 'N/A' && info.zeroDay === true)
+                                  .length
+                            : 0}
+                        /{selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay !== 'N/A').length : 0}
                     </div>
                 </div>
             </div>
@@ -206,7 +209,13 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         <div className="detail-threat-zeroday-row">
                             <div className="detail-zeroday-title">Zero-Day</div>
                             <div className="detail-zeroday-count">
-                                {selectedDetail ? (selectedDetail.zeroDay === true ? 'True' : 'False') : ' '}
+                                {selectedDetail
+                                    ? selectedDetail.zeroDay === 'N/A'
+                                        ? 'N/A'
+                                        : selectedDetail.zeroDay === true
+                                        ? 'True'
+                                        : 'False'
+                                    : ' '}
                             </div>
                         </div>
 

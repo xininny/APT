@@ -113,7 +113,12 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                         if (countryData.length > 0) {
                             const countryInfoArray = countryData.map((data) => ({
                                 threatActor: data['Threat Actor'],
-                                zeroDay: data['Zero-Day'],
+                                zeroDay:
+                                    data['Zero-Day'] === 'N/A'
+                                        ? 'N/A'
+                                        : data['Zero-Day'] === true || data['Zero-Day']?.toLowerCase() === 'true'
+                                        ? true
+                                        : false,
                                 isHash: data['IsHash'] && data['IsHash'].toLowerCase() === 'true' ? 'True' : 'False',
                                 downloadUrl: data['Download Url'],
                                 source: data['Source'],
@@ -121,9 +126,9 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                 initialVector: data['InitialVector'] || 'N/A',
                                 malware: data['Malware'] || 'N/A',
                                 targetedSectors: data['Target Sectors'] || 'N/A',
-                                duration: data['Duration'] ? `${data['Duration']} days` : 'N/A', // ✅ Duration을 숫자로 변환 후 문자열 추가
-                                startDate: data['Start Date'] || 'N/A', // ✅ Start Date 추가
-                                endDate: data['End Date'] || 'N/A', // ✅ End Date 추가
+                                duration: data['Duration'] ? `${data['Duration']} days` : 'N/A',
+                                startDate: data['Start Date'] || 'N/A',
+                                endDate: data['End Date'] || 'N/A',
                             }));
 
                             if (lastSelectedPolygon) {
