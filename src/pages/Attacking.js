@@ -23,7 +23,7 @@ const Attacking = () => {
             return acc;
         }, {});
 
-        // ✅ Threat Country가 존재하고 Zero-Day가 True인 경우만 카운트
+        // ✅ Threat Country가 존재하면서 Zero-Day가 True인 경우만 카운트
         const zeroDayTrueCount = yearData.filter(
             (item) =>
                 item['Threat Country'] &&
