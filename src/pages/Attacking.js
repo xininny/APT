@@ -16,7 +16,7 @@ const Attacking = () => {
                         item['Threat Country']
                             .split(/[,;]/) // ✅ 쉼표(`,`) 또는 세미콜론(`;`)으로 분리
                             .map((c) => c.trim())
-                            .filter((c) => c)
+                            .filter((c) => c && c !== 'NaN')
                     ),
                 ];
 

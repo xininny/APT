@@ -17,7 +17,7 @@ const Attacked = () => {
                         item['Victims']
                             .split(/[,;]/) // ✅ 쉼표(`,`) 또는 세미콜론(`;`) 기준으로 분리
                             .map((v) => v.trim())
-                            .filter((v) => v)
+                            .filter((v) => v && v !== 'NaN')
                     ),
                 ];
 
