@@ -9,7 +9,7 @@ const Attacked = () => {
         const victimsTimes = yearData.reduce((acc, item) => {
             if (item['Victims'] && item['Victims'] !== 'N/A') {
                 const victims = item['Victims']
-                    .split(/[,;]/)
+                    // .split(/[,;]/)
                     .map((v) => v.trim())
                     .filter((v) => v);
 
