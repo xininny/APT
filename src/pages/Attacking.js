@@ -3,6 +3,8 @@ import CommonAPTPage from './CommonAPTPage';
 
 const Attacking = () => {
     const calculateData = (aptData, year) => {
+        console.log('🔍 [DEBUG] Selected Year:', year);
+        console.log('📊 [DEBUG] Raw APT Data:', aptData);
         // ✅ 해당 연도의 데이터 필터링
         const yearData = aptData.filter((item) => new Date(item.Date).getFullYear() === year);
 
@@ -22,7 +24,7 @@ const Attacking = () => {
             }
             return acc;
         }, {});
-
+        console.log('👥 [DEBUG] Victims Count Object:', countryTimes);
         // ✅ Threat Country가 존재하면서 Zero-Day가 True인 경우만 카운트
         const zeroDayTrueCount = yearData.filter(
             (item) =>
@@ -30,9 +32,9 @@ const Attacking = () => {
                 item['Threat Country'] !== 'N/A' &&
                 (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
         ).length;
-
+        console.log('🛑 [DEBUG] Zero-Day True Count:', zeroDayTrueCount);
         const totalTimes = Object.values(countryTimes).reduce((acc, count) => acc + count, 0);
-
+        console.log('🔥 [DEBUG] Total Attacks Count (totalTimes):', totalTimes);
         return { totalTimes, zeroDayTrueCount };
     };
 
