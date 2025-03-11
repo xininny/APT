@@ -7,7 +7,7 @@ import WorldIcon from './svg/World.svg';
 import DetailIcon from './svg/Detail.svg';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 
-const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setYear, yearOptions }) => {
+const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setYear, yearOptions, aptData }) => {
     const [isThreatActorOpen, setIsThreatActorOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedDetail, setSelectedDetail] = useState(null);
@@ -65,6 +65,17 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
         const feature = am4geodata_worldLow.features.find((f) => f.properties.id === countryCode);
         return feature ? feature.properties.name : 'Country';
     };
+    const [yearlyZeroDayTrueCount, setYearlyZeroDayTrueCount] = useState(0);
+
+    useEffect(() => {
+        if (aptData) {
+            const filteredData = aptData.filter((item) => {
+                const itemYear = new Date(item.Date).getFullYear();
+                return itemYear === year && item['Zero-Day'] === true;
+            });
+            setYearlyZeroDayTrueCount(filteredData.length);
+        }
+    }, [aptData, year]);
 
     useEffect(() => {
         if (selectedCountry) {
@@ -121,7 +132,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
 
                     <div className="Zero-Day-row">
                         <div className="Zero-Day">Zero-Day</div>
-                        <div className="Zero-Day-Count">{zeroDayTrueCount} times</div>
+                        <div className="Zero-Day-Count">{yearlyZeroDayTrueCount} times</div>
                     </div>
                 </div>
             </div>
