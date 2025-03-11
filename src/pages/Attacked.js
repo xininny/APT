@@ -12,10 +12,14 @@ const Attacked = () => {
 
         const victimsTimes = yearData.reduce((acc, item) => {
             if (item['Victims'] && item['Victims'] !== 'N/A') {
-                const victims = item['Victims']
-                    .split(/[,]/) // ✅ 쉼표 또는 세미콜론으로 구분
-                    .map((v) => v.trim())
-                    .filter((v) => v);
+                const victims = [
+                    ...new Set( // ✅ 중복 제거
+                        item['Victims']
+                            .split(/[,;]/) // ✅ 쉼표(`,`) 또는 세미콜론(`;`) 기준으로 분리
+                            .map((v) => v.trim())
+                            .filter((v) => v)
+                    ),
+                ];
 
                 victims.forEach((victim) => {
                     if (!acc[victim]) {
