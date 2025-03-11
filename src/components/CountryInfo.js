@@ -138,7 +138,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
 
                     <div className="Zero-Day-row">
                         <div className="Zero-Day">Zero-Day</div>
-                        <div className="Zero-Day-Count">{yearlyZeroDayTrueCount} times</div>
+                        <div className="Zero-Day-Count">{zeroDayTrueCount} times</div>
                     </div>
                 </div>
             </div>
