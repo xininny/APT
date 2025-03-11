@@ -68,12 +68,17 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
     const [yearlyZeroDayTrueCount, setYearlyZeroDayTrueCount] = useState(0);
 
     useEffect(() => {
-        if (aptData) {
-            const filteredData = aptData.filter((item) => {
+        if (aptData && aptData.length > 0) {
+            // ✅ 해당 연도의 데이터를 필터링
+            const yearlyData = aptData.filter((item) => {
                 const itemYear = new Date(item.Date).getFullYear();
-                return itemYear === year && item['Zero-Day'] === true;
+                return itemYear === year;
             });
-            setYearlyZeroDayTrueCount(filteredData.length);
+
+            // ✅ Zero-Day가 True인 항목만 카운트
+            const zeroDayTrueCount = yearlyData.filter((item) => item['Zero-Day'] === true).length;
+
+            setYearlyZeroDayTrueCount(zeroDayTrueCount);
         }
     }, [aptData, year]);
 
