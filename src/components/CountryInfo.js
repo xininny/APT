@@ -74,34 +74,28 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                 return itemYear === year;
             });
 
-            let zeroDayTrueCount = 0;
-
-            if (selectedCountry) {
-                // ✅ 선택된 국가의 Zero-Day True 개수만 계산
-                zeroDayTrueCount = yearlyData.filter((item) => {
-                    return (
-                        item['Threat Country'] &&
-                        item['Threat Country']
-                            .split(/[,;]/)
-                            .map((c) => c.trim())
-                            .includes(selectedCountry.name) && // 선택된 국가만 필터링
-                        (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True') &&
-                        item['Zero-Day'] !== 'N/A'
-                    );
-                }).length;
-            } else {
-                // ✅ 전체 Zero-Day True 개수 계산
-                zeroDayTrueCount = yearlyData.filter((item) => {
-                    return (
-                        (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True') &&
-                        item['Zero-Day'] !== 'N/A'
-                    );
-                }).length;
-            }
+            const zeroDayTrueCount = yearlyData.filter((item) => {
+                const zeroDayValue = item['Zero-Day'];
+                return zeroDayValue && (zeroDayValue === true || zeroDayValue === 'TRUE') && zeroDayValue !== 'N/A';
+            }).length;
 
             setYearlyZeroDayTrueCount(zeroDayTrueCount);
         }
-    }, [aptData, year, selectedCountry]);
+    }, [aptData, year]);
+
+    useEffect(() => {
+        if (selectedCountry) {
+            const countryCode = selectedCountry.code || 'World';
+            const countryName = getCountryName(countryCode);
+            const flagPath = getFlagPath(countryCode);
+            setCurrentFlag(flagPath);
+            setCurrentCountry(countryName);
+            setSelectedDetail(null);
+        } else {
+            setCurrentFlag(WorldIcon);
+            setCurrentCountry('Country');
+        }
+    }, [selectedCountry]);
 
     return (
         <div className="country-info">
