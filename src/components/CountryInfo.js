@@ -69,14 +69,15 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
 
     useEffect(() => {
         if (aptData && aptData.length > 0) {
-            // ✅ 해당 연도의 데이터를 필터링
             const yearlyData = aptData.filter((item) => {
                 const itemYear = new Date(item.Date).getFullYear();
                 return itemYear === year;
             });
 
-            // ✅ Zero-Day가 True인 항목만 카운트
-            const zeroDayTrueCount = yearlyData.filter((item) => item['Zero-Day'] === true).length;
+            const zeroDayTrueCount = yearlyData.filter((item) => {
+                const zeroDayValue = item['Zero-Day'];
+                return zeroDayValue && (zeroDayValue === true || zeroDayValue === 'TRUE') && zeroDayValue !== 'N/A';
+            }).length;
 
             setYearlyZeroDayTrueCount(zeroDayTrueCount);
         }
