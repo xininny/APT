@@ -13,7 +13,7 @@ const Attacked = () => {
         const victimsTimes = yearData.reduce((acc, item) => {
             if (item['Victims'] && item['Victims'] !== 'N/A') {
                 const victims = item['Victims']
-                    .split(/[,;]/) // ✅ 쉼표 또는 세미콜론으로 구분
+                    .split(/[,]/) // ✅ 쉼표 또는 세미콜론으로 구분
                     .map((v) => v.trim())
                     .filter((v) => v);
 
