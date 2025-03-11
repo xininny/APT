@@ -33,41 +33,32 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
         return match ? `${match[0]} days` : 'N/A';
     };
 
-    const parseTimeline = (timeline) => {
-        if (!timeline) {
+    const parseTimeline = (detail) => {
+        if (!detail) {
             return { startDate: 'N/A', endDate: 'N/A' };
         }
 
-        // ✅ Case 1: 객체 타입 {"Start Date": "YYYY-MM-DD", "End Date": "YYYY-MM-DD"}
-        if (typeof timeline === 'object') {
-            const { 'Start Date': startDate, 'End Date': endDate } = timeline;
-            const isValidDate = (date) => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date);
+        // ✅ `Start Date` 및 `End Date`가 개별 속성으로 존재하는 경우
+        const startDate = detail['Start Date'] || 'N/A';
+        const endDate = detail['End Date'] || 'N/A';
 
+        // ✅ 기존 `timeline` 속성이 객체라면 "Start Date"와 "End Date"를 가져옴
+        if (typeof detail.timeline === 'object' && detail.timeline['Start Date'] && detail.timeline['End Date']) {
             return {
-                startDate: isValidDate(startDate) ? startDate : 'N/A',
-                endDate: isValidDate(endDate) ? endDate : 'N/A',
+                startDate: detail.timeline['Start Date'],
+                endDate: detail.timeline['End Date'],
             };
         }
 
-        // ✅ Case 2: 문자열 타입 "YYYY-MM-DD - YYYY-MM-DD"
-        if (typeof timeline === 'string') {
-            const rangeMatch = timeline.match(/^(\d{4}-\d{2}-\d{2})\s?-\s?(\d{4}-\d{2}-\d{2})$/);
+        // ✅ `timeline` 속성이 문자열 형식이라면 정규식으로 날짜 추출
+        if (typeof detail.timeline === 'string') {
+            const rangeMatch = detail.timeline.match(/^(\d{4}-\d{2}-\d{2})\s?-\s?(\d{4}-\d{2}-\d{2})$/);
             if (rangeMatch) {
                 return { startDate: rangeMatch[1], endDate: rangeMatch[2] };
             }
-
-            // ✅ Case 3: "Start date: YYYY-MM-DD, End date: YYYY-MM-DD" 형태의 문자열 처리
-            const startMatch = timeline.match(/Start date:\s?(\d{4}-\d{2}-\d{2})/i);
-            const endMatch = timeline.match(/End date:\s?(\d{4}-\d{2}-\d{2})/i);
-
-            return {
-                startDate: startMatch ? startMatch[1] : 'N/A',
-                endDate: endMatch ? endMatch[1] : 'N/A',
-            };
         }
 
-        // ✅ 예상하지 못한 데이터 형식은 기본값 반환
-        return { startDate: 'N/A', endDate: 'N/A' };
+        return { startDate, endDate };
     };
 
     const handleCountrySelect = (country) => {
@@ -284,16 +275,18 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         </div>
                         <div className="detail-threat-timeline-row">
                             <div className="detail-threat-timeline-title">Timeline (Duration)</div>
-                            {selectedDetail && selectedDetail.timeline ? (
+                            {selectedDetail ? (
                                 <div className="detail-threat-timeline-name">
                                     {(() => {
-                                        const { startDate, endDate } = parseTimeline(selectedDetail.timeline);
-                                        if (!startDate && !endDate) return '';
-                                        if (!startDate) return `~ ${endDate}`;
-                                        if (!endDate) return `${startDate} ~`;
+                                        const { startDate, endDate } = parseTimeline(selectedDetail);
+
+                                        if (startDate === 'N/A' && endDate === 'N/A') return 'N/A';
+                                        if (startDate === 'N/A') return `~ ${endDate}`;
+                                        if (endDate === 'N/A') return `${startDate} ~`;
+
                                         return `${startDate} ~ ${endDate}`;
                                     })()}{' '}
-                                    {selectedDetail.duration ? `(${formatDuration(selectedDetail.duration)})` : ''}
+                                    {selectedDetail.duration ? `(${selectedDetail.duration} days)` : ''}
                                 </div>
                             ) : null}
                         </div>
