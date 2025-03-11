@@ -120,9 +120,10 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                 CVE: data['CVE'] || 'N/A',
                                 initialVector: data['InitialVector'] || 'N/A',
                                 malware: data['Malware'] || 'N/A',
-                                timeline: data['Timeline'] || 'N/A',
-                                targetedSectors: data['Targeted Sectors'] || 'N/A',
-                                duration: data['Duration'] || 'N/A',
+                                targetedSectors: data['Target Sectors'] || 'N/A',
+                                duration: data['Duration'] ? `${data['Duration']} days` : 'N/A', // ✅ Duration을 숫자로 변환 후 문자열 추가
+                                startDate: data['Start Date'] || 'N/A', // ✅ Start Date 추가
+                                endDate: data['End Date'] || 'N/A', // ✅ End Date 추가
                             }));
 
                             if (lastSelectedPolygon) {
