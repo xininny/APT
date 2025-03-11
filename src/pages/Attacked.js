@@ -13,7 +13,8 @@ const Attacked = () => {
                         .map((v) => v.trim())
                         .filter((v) => v);
 
-                    if (item['Zero-Day'] === true) {
+                    // ✅ Zero-Day True 개수를 Victims이 존재하는 경우에만 카운트
+                    if (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE') {
                         acc.zeroDayTrueCount += victims.length;
                     }
 
