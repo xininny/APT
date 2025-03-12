@@ -58,10 +58,29 @@ const Attacked = () => {
 
         console.log('🛑 [DEBUG] Zero-Day True Count:', zeroDayTrueCount);
 
+        // ✅ Zero-Day True Count를 Victims Count Object를 기준으로 다시 필터링하여 정확한 값 얻기
+        let verifiedZeroDayCount = 0;
+        Object.keys(victimsTimes).forEach((victim) => {
+            const victimData = yearData.filter(
+                (item) =>
+                    item['Victims'] &&
+                    item['Victims']
+                        .split(/[,;]/)
+                        .map((v) => v.trim())
+                        .includes(victim) &&
+                    item['Zero-Day'] &&
+                    item['Zero-Day'] !== 'N/A' &&
+                    (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
+            );
+            verifiedZeroDayCount += victimData.length;
+        });
+
+        console.log('✅ [DEBUG] Verified Zero-Day True Count:', verifiedZeroDayCount);
+
         const totalTimes = Object.values(victimsTimes).reduce((acc, count) => acc + count, 0);
         console.log('🔥 [DEBUG] Total Attacks Count (totalTimes):', totalTimes);
 
-        return { totalTimes, zeroDayTrueCount };
+        return { totalTimes, zeroDayTrueCount: verifiedZeroDayCount };
     };
 
     return (
