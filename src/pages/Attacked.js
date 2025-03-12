@@ -33,13 +33,26 @@ const Attacked = () => {
 
         console.log('👥 [DEBUG] Victims Count Object:', victimsTimes);
 
-        // ✅ Victims가 존재하면서 Zero-Day가 True인 경우만 카운트
-        const zeroDayTrueCount = yearData.filter(
-            (item) =>
+        // ✅ Victims가 존재하면서 Zero-Day가 True인 경우, Victims를 개별적으로 카운트
+        let zeroDayTrueCount = 0;
+        yearData.forEach((item) => {
+            if (
                 item['Victims'] &&
                 item['Victims'] !== 'N/A' &&
                 (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
-        ).length;
+            ) {
+                const victims = [
+                    ...new Set(
+                        item['Victims']
+                            .split(/[,;]/)
+                            .map((v) => v.trim())
+                            .filter((v) => v && v !== 'NaN')
+                    ),
+                ];
+                zeroDayTrueCount += victims.length;
+                console.log(`🛑 [DEBUG] Zero-Day Attack Victims:`, victims, `Counted as: ${victims.length}`);
+            }
+        });
 
         console.log('🛑 [DEBUG] Zero-Day True Count:', zeroDayTrueCount);
 
