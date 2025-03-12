@@ -39,6 +39,8 @@ const Attacked = () => {
             if (
                 item['Victims'] &&
                 item['Victims'] !== 'N/A' &&
+                item['Zero-Day'] &&
+                item['Zero-Day'] !== 'N/A' &&
                 (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
             ) {
                 const victims = [
