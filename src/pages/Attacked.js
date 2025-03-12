@@ -52,7 +52,11 @@ const Attacked = () => {
                     ),
                 ];
                 zeroDayTrueCount += victims.length;
-                console.log(`🛑 [DEBUG] Zero-Day Attack Victims:`, victims, `Counted as: ${victims.length}`);
+                console.log(
+                    `🛑 [DEBUG] Zero-Day Attack Victims from ${item['Victims']} (Zero-Day: ${item['Zero-Day']}):`,
+                    victims,
+                    `Counted as: ${victims.length}`
+                );
             }
         });
 
@@ -72,10 +76,13 @@ const Attacked = () => {
                     item['Zero-Day'] !== 'N/A' &&
                     (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
             );
+            if (victimData.length > 0) {
+                console.log(`✅ [DEBUG] Verified Zero-Day True Count for Victim ${victim}:`, victimData.length);
+            }
             verifiedZeroDayCount += victimData.length;
         });
 
-        console.log('✅ [DEBUG] Verified Zero-Day True Count:', verifiedZeroDayCount);
+        console.log('✅ [DEBUG] Final Verified Zero-Day True Count:', verifiedZeroDayCount);
 
         const totalTimes = Object.values(victimsTimes).reduce((acc, count) => acc + count, 0);
         console.log('🔥 [DEBUG] Total Attacks Count (totalTimes):', totalTimes);
