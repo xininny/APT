@@ -46,7 +46,7 @@ const Attacked = () => {
                         item['Victims']
                             .split(/[,;]/)
                             .map((v) => v.trim())
-                            .filter((v) => v && v !== 'NaN')
+                            .filter((v) => v && v !== 'N/A' && v !== 'NaN')
                     ),
                 ];
                 zeroDayTrueCount += victims.length;
