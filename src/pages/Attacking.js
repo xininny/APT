@@ -32,14 +32,22 @@ const Attacking = () => {
 
         console.log('🌍 [DEBUG] Threat Country Count:', countryTimes);
 
-        // ✅ Threat Country가 존재하면서 Zero-Day가 True인 경우만 카운트
-        const zeroDayTrueCount = yearData.filter(
+        // ✅ Zero-Day가 True인 경우에 대한 데이터를 필터링
+        const zeroDayData = yearData.filter(
             (item) =>
                 item['Threat Country'] &&
                 item['Threat Country'] !== 'N/A' &&
                 (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
-        ).length;
+        );
 
+        // ✅ Zero-Day 공격에 해당하는 국가와 공격의 목록 출력
+        console.log('🛑 [DEBUG] Zero-Day Attack Data:', zeroDayData);
+
+        // ✅ Zero-Day 공격에 관련된 국가를 출력
+        const zeroDayCountries = [...new Set(zeroDayData.map((item) => item['Threat Country']))];
+        console.log('🌍 [DEBUG] Zero-Day Threat Countries:', zeroDayCountries);
+
+        const zeroDayTrueCount = zeroDayData.length;
         console.log('🛑 [DEBUG] Zero-Day True Count:', zeroDayTrueCount);
 
         const totalTimes = Object.values(countryTimes).reduce((acc, count) => acc + count, 0);
@@ -47,6 +55,7 @@ const Attacking = () => {
 
         return { totalTimes, zeroDayTrueCount };
     };
+
     return (
         <CommonAPTPage
             filterColumn="Threat Country"
