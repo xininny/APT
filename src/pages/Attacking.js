@@ -35,9 +35,9 @@ const Attacking = () => {
         // ✅ Zero-Day가 True인 경우에 대한 데이터를 필터링
         const zeroDayData = yearData.filter(
             (item) =>
-                item['Threat Country'] &&
-                item['Threat Country'] !== 'N/A' &&
-                (item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True')
+                // item['Threat Country'] &&
+                // item['Threat Country'] !== 'N/A' &&
+                item['Zero-Day'] === true || item['Zero-Day'] === 'TRUE' || item['Zero-Day'] === 'True'
         );
 
         // ✅ Zero-Day 공격에 해당하는 국가와 공격의 목록 출력
