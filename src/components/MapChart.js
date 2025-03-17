@@ -84,6 +84,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
             polygonSeries.data = data;
             polygonSeries.mapPolygons.template.propertyFields.fill = 'fill';
             polygonSeries.mapPolygons.template.tooltipText = '{customName}: {times}';
+            polygonSeries.mapPolygons.template.tooltipPosition = 'pointer';
             polygonSeries.tooltip.background.fill = am4core.color('#0220470d'); // 회색 배경
             // polygonSeries.tooltip.background.stroke = am4core.color('#cccccc'); // 테두리 색상
             // polygonSeries.tooltip.background.strokeWidth = 1; // 테두리 두께 1px 설정
@@ -167,7 +168,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                 height: '903px',
                 position: 'absolute',
                 left: '20px',
-                top: '107px',
+                top: '80px',
                 borderRadius: '16px',
                 overflow: 'hidden',
             }}

@@ -9,8 +9,8 @@
     align-items: center;
     justify-content: flex-start;
     box-sizing: border-box;
-    margin: 38px 0px 0px 20px;
-    gap: 1020px;
+    margin: 38px 0px 0px 30px;
+    gap: 1360px;
 }
 
 .Navbar-title {
@@ -23,6 +23,7 @@
 }
 .Navbar-title-text {
     margin-left: 8px;
+    width: 150px;
 }
 .Navbar-links {
     display: flex;
