@@ -99,8 +99,9 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                 onCountrySelect((prevSelectedCountry) => {
                     if (prevSelectedCountry && prevSelectedCountry.code === countryCode) {
                         if (lastSelectedPolygon) {
-                            lastSelectedPolygon.stroke = am4core.color('none');
-                            lastSelectedPolygon.strokeWidth = 0;
+                            // 이전 선택한 나라의 테두리 색상과 채우기 색상을 원래대로 초기화
+                            lastSelectedPolygon.stroke = am4core.color('#ffffff'); // 기본 테두리 색
+                            lastSelectedPolygon.strokeWidth = 1; // 기본 테두리 두께로 설정
                             lastSelectedPolygon = null;
                         }
                         return null;
@@ -134,14 +135,16 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                 endDate: data['End Date'] || 'N/A',
                             }));
 
+                            // 이전 선택한 폴리곤의 테두리 색상과 두께 초기화
                             if (lastSelectedPolygon) {
-                                lastSelectedPolygon.stroke = am4core.color('none');
-                                lastSelectedPolygon.strokeWidth = 0;
+                                lastSelectedPolygon.stroke = am4core.color('#e5e8eb'); // 기본 색상
+                                lastSelectedPolygon.strokeWidth = 1; // 기본 두께
                             }
 
+                            // 현재 선택한 폴리곤의 테두리 색상과 두께 변경
                             lastSelectedPolygon = event.target;
-                            event.target.stroke = am4core.color(selectedColor);
-                            event.target.strokeWidth = 3;
+                            event.target.stroke = am4core.color(selectedColor); // 선택된 색상
+                            event.target.strokeWidth = 3; // 두께 설정
 
                             return {
                                 name: event.target.dataItem.dataContext.name,
