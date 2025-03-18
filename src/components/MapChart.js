@@ -131,8 +131,8 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                 malware: data['Malware'] || 'N/A',
                                 targetedSectors: data['Target Sectors'] || 'N/A',
                                 duration: data['Duration'] ? `${data['Duration']} days` : 'N/A',
-                                startDate: data['Start Date'] || 'N/A',
-                                endDate: data['End Date'] || 'N/A',
+                                startDate: data['New Start Date'] || 'N/A',
+                                endDate: data['New End Date'] || 'N/A',
                             }));
 
                             // 이전 선택한 폴리곤의 테두리 색상과 두께 초기화
