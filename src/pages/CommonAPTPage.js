@@ -6,7 +6,7 @@ import CountryInfo from '../components/CountryInfo';
 
 const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData }) => {
     const { aptData, yearOptions, isLoading } = useContext(APTDataContext);
-    const [year, setYear] = useState(yearOptions.length ? Math.max(...yearOptions) : 2023);
+    const [year, setYear] = useState(yearOptions.length ? Math.max(...yearOptions) : 2024);
     const [selectedCountry, setSelectedCountry] = useState(null);
 
     if (isLoading) {
