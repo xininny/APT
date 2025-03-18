@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './CountryInfo.css';
 import DownIcon from './svg/CountryInfo-down.svg';
 import DownloadIcon from './svg/Download.svg';
-import CalendarIcon from './svg/calendar.svg';
+import CalendarIcon from './svg/Calendar.svg';
 import WorldIcon from './svg/world-map.svg';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 
