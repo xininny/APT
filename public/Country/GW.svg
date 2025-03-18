@@ -1,6 +1,1 @@
-<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M34.505 8.5H6.495C4.288 8.5 2.5 10.289 2.5 12.496V28.505C2.5 30.712 4.289 32.501 6.495 32.501H34.504C36.711 32.501 38.499 30.712 38.499 28.505V12.496C38.499 10.289 36.711 8.5 34.505 8.5Z" fill="#CC001C"/>
-<path d="M14.9238 20.5V32.5H34.5048C36.7118 32.5 38.4998 30.711 38.4998 28.504V20.5H14.9238Z" fill="#00A03E"/>
-<path d="M38.4998 16.499V12.495C38.4998 10.288 36.7108 8.49902 34.5048 8.49902H14.9238V20.499H38.4998V16.499Z" fill="#F9CF00"/>
-<path d="M10.2128 20.9374L12.1318 19.5374H9.75983L9.02683 17.2734L8.29483 19.5374H5.92383L7.84183 20.9364L7.10883 23.2014L9.02783 21.8024L10.9458 23.2014L10.2128 20.9374Z" fill="black"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="480" width="640" version="1"><path fill="#ce1126" d="M0 0h320v480H0z"/><path fill="#fcd116" d="M320 0h320v240H320z"/><path fill="#009e49" d="M320 240h320v240H320z"/><g id="b" transform="matrix(80 0 0 80 160 240)"><path id="a" d="M0-1v1h.5" transform="rotate(18 0 -1)"/><use height="100%" width="100%" xlink:href="#a" transform="scale(-1 1)"/></g><use height="100%" width="100%" xlink:href="#b" transform="rotate(72 160 240)"/><use height="100%" width="100%" xlink:href="#b" transform="rotate(144 160 240)"/><use height="100%" width="100%" xlink:href="#b" transform="rotate(-144 160 240)"/><use height="100%" width="100%" xlink:href="#b" transform="rotate(-72 160 240)"/></svg>

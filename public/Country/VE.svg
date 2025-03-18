@@ -1,13 +1,1 @@
-<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M34.5 8.5H6.5C4.29086 8.5 2.5 10.2909 2.5 12.5V28.5C2.5 30.7091 4.29086 32.5 6.5 32.5H34.5C36.7091 32.5 38.5 30.7091 38.5 28.5V12.5C38.5 10.2909 36.7091 8.5 34.5 8.5Z" fill="#D00032"/>
-<path d="M2.5 12.496V16.5H38.5V12.496C38.5 10.289 36.711 8.5 34.505 8.5H6.495C4.288 8.5 2.5 10.289 2.5 12.496Z" fill="#F3D000"/>
-<path d="M38.5 16.5H2.5V24.501H38.5V16.5Z" fill="#2B3B9D"/>
-<path d="M18.6993 19.3483L19.0203 17.0703L20.1083 19.1013L18.0273 18.0933L20.3063 17.6933L18.6993 19.3483Z" fill="#E3E7EA"/>
-<path d="M20.8924 19.1013L21.9794 17.0703L22.3014 19.3483L20.6934 17.6933L22.9734 18.0933L20.8924 19.1013Z" fill="#E3E7EA"/>
-<path d="M16.7212 20.3272L16.2402 18.0762L17.9602 19.6162L15.6582 19.3762L17.6622 18.2252L16.7212 20.3272Z" fill="#E3E7EA"/>
-<path d="M23.0391 19.6162L24.7601 18.0762L24.2771 20.3272L23.3371 18.2252L25.3411 19.3762L23.0391 19.6162Z" fill="#E3E7EA"/>
-<path d="M15.2 21.917L13.975 19.967L16.121 20.828L13.875 21.385L15.363 19.623L15.2 21.917Z" fill="#E3E7EA"/>
-<path d="M24.8789 20.828L27.0249 19.967L25.7989 21.917L25.6369 19.623L27.1249 21.385L24.8789 20.828Z" fill="#E3E7EA"/>
-<path d="M14.3191 23.9278L12.4961 22.5118L14.8091 22.5918L12.8891 23.8788L13.6811 21.7168L14.3191 23.9278Z" fill="#E3E7EA"/>
-<path d="M26.1914 22.5918L28.5044 22.5118L26.6814 23.9278L27.3194 21.7168L28.1114 23.8788L26.1914 22.5918Z" fill="#E3E7EA"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="480" viewBox="0 0 128 96"><defs><g id="d" transform="translate(0 -36)"><g id="c"><g id="b"><path d="M0-5L-1.545-.245l2.853.927z" id="a" fill="#fff"/><use xlink:href="#a" transform="scale(-1 1)" width="180" height="120"/></g><use xlink:href="#b" transform="rotate(72)" width="180" height="120"/></g><use xlink:href="#b" transform="rotate(-72)" width="180" height="120"/><use xlink:href="#c" transform="rotate(144)" width="180" height="120"/></g></defs><path d="M0 0h128v96H0z" fill="#cf142b"/><path d="M0 0h128v64H0z" fill="#00247d"/><path d="M0 0h128v32H0z" fill="#fc0"/><g transform="matrix(.8 0 0 .8 64 67.2)"><g id="f"><g id="e"><use xlink:href="#d" transform="rotate(10)" width="180" height="120"/><use xlink:href="#d" transform="rotate(30)" width="180" height="120"/></g><use xlink:href="#e" transform="rotate(40)" width="180" height="120"/></g><use xlink:href="#f" transform="rotate(-80)" width="180" height="120"/></g></svg>

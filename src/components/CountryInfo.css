@@ -93,6 +93,7 @@
 }
 .Country-flag {
     width: 19px;
+    border-radius: 4px;
 }
 .Selected-Country-name {
     font-size: 19px;

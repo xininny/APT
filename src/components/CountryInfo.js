@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './CountryInfo.css';
 import DownIcon from './svg/CountryInfo-down.svg';
 import DownloadIcon from './svg/Download.svg';
-import CalendarIcon from './svg/Calendar.svg';
-import WorldIcon from './svg/World.svg';
-import DetailIcon from './svg/Detail.svg';
+import CalendarIcon from './svg/calendar.svg';
+import WorldIcon from './svg/world-map.svg';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 
 const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setYear, yearOptions, aptData }) => {
@@ -213,7 +212,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                 <div className="divider"></div>
                 <div className="detail-section">
                     <div className="detail-title-sub">
-                        <img src={DetailIcon} alt="Detail icon" className="Detail-icon" />
+                        🔎
                         <div className="detail-name">Detail</div>
                     </div>
                     <div className={`detail-sub-container ${selectedDetail ? 'detail-sub-active' : ''}`}>

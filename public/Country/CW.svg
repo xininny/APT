@@ -1,5 +1,1 @@
-<svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M34.5 8.5H6.5C4.29086 8.5 2.5 10.2909 2.5 12.5V28.5C2.5 30.7091 4.29086 32.5 6.5 32.5H34.5C36.7091 32.5 38.5 30.7091 38.5 28.5V12.5C38.5 10.2909 36.7091 8.5 34.5 8.5Z" fill="#1A3375"/>
-<path d="M38.5 23.6299H2.5V27.7749H38.5V23.6299Z" fill="#FBE900"/>
-<path d="M11.5673 15.7409L10.9993 13.8319L10.4313 15.7409H8.59534L10.0813 16.9209L9.51434 18.8289L11.0003 17.6499L12.4863 18.8289L11.9203 16.9209L13.4063 15.7409H11.5693H11.5673ZM9.01034 11.8099H7.63234L7.20634 10.3789L6.78034 11.8099H5.40234L6.51634 12.6949L6.09034 14.1269L7.20534 13.2409L8.32034 14.1269L7.89434 12.6949L9.00834 11.8099H9.01034Z" fill="#E3E7EA"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" height="480" width="640" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="b" d="M0-1l.225.69H.95L.364.12l.225.69L0 .383-.588.81l.225-.692L-.95-.31h.725z"/><clipPath id="a"><path fill-opacity=".67" d="M0 0h682.67v512H0z"/></clipPath></defs><g clip-path="url(#a)" transform="scale(.94)"><path fill="#002b7f" d="M0 0h768v512H0z"/><path fill="#f9e814" d="M0 320h768v64H0z"/><use xlink:href="#b" transform="scale(42.67)" height="9000" width="13500" y="2" x="2" fill="#fff"/><use xlink:href="#b" transform="scale(56.9)" height="9000" width="13500" y="3" x="3" fill="#fff"/></g></svg>
