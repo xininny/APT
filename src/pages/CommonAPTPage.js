@@ -3,20 +3,19 @@ import { APTDataContext } from '../contexts/APTDataContext';
 import Navbar from '../components/Navbar';
 import MapChart from '../components/MapChart';
 import CountryInfo from '../components/CountryInfo';
+import InfoPopup from '../components/Info';
 
 const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData }) => {
     const { aptData, yearOptions, isLoading } = useContext(APTDataContext);
     const [year, setYear] = useState(yearOptions.length ? Math.max(...yearOptions) : 2024);
     const [selectedCountry, setSelectedCountry] = useState(null);
 
-    if (isLoading) {
-    }
-
     const { totalTimes, zeroDayTrueCount } = calculateData(aptData, year);
 
     return (
         <div>
             <Navbar />
+            <InfoPopup />
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{ flex: 1 }}>
                     <MapChart
