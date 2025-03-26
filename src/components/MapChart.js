@@ -13,13 +13,16 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
             chart.seriesContainer.draggable = false;
             chart.seriesContainer.resizable = false;
             chart.background.fill = am4core.color('#FFFFFF');
-            chart.background.fillOpacity = 1;
+            chart.background.fillOpacity = 1; // 이 줄을 추가
 
             chart.svgContainer.htmlElement.style.width = '1465px';
-            chart.svgContainer.htmlElement.style.height = '903px';
+            chart.svgContainer.htmlElement.style.height = '850px';
 
             let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
             polygonSeries.useGeodata = true;
+
+            polygonSeries.exclude = ['AQ'];
+
             const getCountryName = (countryCode) => {
                 const feature = am4geodata_worldLow.features.find((f) => f.properties.id === countryCode);
                 return feature ? feature.properties.name : countryCode; // 국가 이름 반환, 없으면 코드 표시
@@ -49,6 +52,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
 
                 return acc;
             }, []);
+
             am4geodata_worldLow.features.forEach((feature) => {
                 const countryCode = feature.properties.id;
                 if (!data.find((d) => d.id === countryCode)) {
@@ -61,6 +65,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                     });
                 }
             });
+
             let maxTimes = Math.max(...data.map((d) => d.value));
 
             data = data.map((d) => {
@@ -86,8 +91,6 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
             polygonSeries.mapPolygons.template.tooltipText = '{customName}: {times}';
             polygonSeries.mapPolygons.template.tooltipPosition = 'pointer';
             polygonSeries.tooltip.background.fill = am4core.color('#0220470d'); // 회색 배경
-            // polygonSeries.tooltip.background.stroke = am4core.color('#cccccc'); // 테두리 색상
-            // polygonSeries.tooltip.background.strokeWidth = 1; // 테두리 두께 1px 설정
             polygonSeries.tooltip.getFillFromObject = false;
             polygonSeries.tooltip.label.fill = am4core.color('#000000');
 
@@ -122,7 +125,6 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                                           data['Zero-Day'].toLowerCase() === 'true'
                                         ? true
                                         : Boolean(data['Zero-Day']),
-
                                 isHash: data['IsHash'] && data['IsHash'].toLowerCase() === 'true' ? 'True' : 'False',
                                 downloadUrl: data['Download Url'],
                                 source: data['Source'],
@@ -171,7 +173,7 @@ const MapChart = ({ aptData, filterColumn, colorScale, selectedColor, year, onCo
                 height: '903px',
                 position: 'absolute',
                 left: '20px',
-                top: '80px',
+                top: '40px',
                 borderRadius: '16px',
                 overflow: 'hidden',
             }}

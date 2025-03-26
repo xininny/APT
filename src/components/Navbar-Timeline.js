@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './Navbar-Timeline.css';
 import Logo from './svg/logo.svg';
 import InfoIcon from '../components/svg/info.svg';
 const Navbar = () => {
@@ -27,14 +27,11 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="Info-overview">
-                        <div className="Info-row-1">
-                            <div className="Info-text">1. Go to the Victims, Attackers, or Timeline page.</div>
-                            <div className="Info-text">3. Click a country on the map to filter by nation.</div>
+                        <div className="Info-text">1. Go to the Victims, Attackers, or Timeline page.</div>
+                        <div className="Info-text">
+                            2. Click a year to view the list of news articles for that year.
                         </div>
-                        <div className="Info-row-2">
-                            <div className="Info-text">2. Choose a year to see data for that year.</div>
-                            <div className="Info-text">4. Select a Threat Actor for detailed attack information.</div>
-                        </div>
+                        <div className="Info-text">3. Click a news link to read the full article.</div>
                     </div>
                 </div>
                 <div className="Navbar-links">

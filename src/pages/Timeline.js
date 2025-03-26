@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import './Timeline.css';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/Navbar-Timeline';
 import DownloadIcon from '../components/svg/Download.svg';
-import Info from '../components/svg/info.svg';
+
 const Timeline = () => {
     const [data, setData] = useState([]);
     const [selectedYear, setSelectedYear] = useState(null);
@@ -49,7 +49,6 @@ const Timeline = () => {
     return (
         <div>
             <Navbar />
-            <img src={Info} alt="Info icon" className="Info-icon" style={{ marginTop: '14px', marginLeft: '1840px' }} />
             <div className="timeline-big-container">
                 <div className="timeline-container">
                     <div className="timeline">

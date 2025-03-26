@@ -2,9 +2,52 @@
     font-family: 'Pretendard';
     position: absolute;
     left: 1496px;
-    top: 80px;
+    top: 40px;
     width: 386px;
 }
+
+.Info-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.Info-sub {
+    margin: 5px 0px 7px 14px;
+    display: flex;
+    align-items: center;
+}
+.Info-icon {
+    width: 18px;
+}
+.Info-Overview {
+    font-size: 18px;
+    align-items: center;
+    font-weight: 500;
+    margin-left: 4px;
+    color: #333d4b;
+    flex-wrap: wrap;
+}
+.Info-row-1 {
+    display: flex;
+    flex: 1 1 50%; /* 각 열이 50%의 너비를 가지도록 설정 */
+    margin-bottom: 8px;
+    width: 710px; /* 각 행 간 간격을 주기 위해 */
+}
+.Info-row-2 {
+    display: flex;
+    flex: 1 1 50%; /* 각 열이 50%의 너비를 가지도록 설정 */ /* 각 행 간 간격을 주기 위해 */
+    width: 710px;
+}
+.Info-overview {
+    margin: 4px 0px 0px 16px;
+}
+
+.Info-text {
+    flex: 1;
+    font-size: 14.5px;
+    color: #4e5968;
+}
+
 .year-overview-container {
     background-color: #ffffff;
     border-radius: 16px;
@@ -206,7 +249,7 @@
 .detail-container {
     background-color: #ffffff;
     border-radius: 0px 0px 16px 16px;
-    height: 478px;
+    height: 425.5px;
 }
 .detail-title-sub {
     margin: 0px 40px 0px 40px;
@@ -229,7 +272,7 @@
 }
 
 .detail-sub-container.detail-sub-active {
-    max-height: 390px;
+    max-height: 340px;
     overflow-y: auto; /* 스크롤 활성화 */
 }
 

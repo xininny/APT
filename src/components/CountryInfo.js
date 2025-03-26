@@ -36,8 +36,6 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
         if (!detail) {
             return { startDate: 'N/A', endDate: 'N/A' };
         }
-
-        // ✅ Start Date 및 End Date가 개별 속성으로 존재하는 경우
         const startDate = detail.startDate || 'N/A';
         const endDate = detail.endDate || 'N/A';
 
