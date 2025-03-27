@@ -27,17 +27,7 @@
     color: #333d4b;
     flex-wrap: wrap;
 }
-.Info-row-1 {
-    display: flex;
-    flex: 1 1 50%; /* 각 열이 50%의 너비를 가지도록 설정 */
-    margin-bottom: 8px;
-    width: 710px; /* 각 행 간 간격을 주기 위해 */
-}
-.Info-row-2 {
-    display: flex;
-    flex: 1 1 50%; /* 각 열이 50%의 너비를 가지도록 설정 */ /* 각 행 간 간격을 주기 위해 */
-    width: 710px;
-}
+
 .Info-overview {
     margin: 4px 0px 0px 16px;
 }
@@ -46,6 +36,7 @@
     flex: 1;
     font-size: 14.5px;
     color: #4e5968;
+    margin-bottom: 5px;
 }
 
 .year-overview-container {

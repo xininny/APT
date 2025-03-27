@@ -15,7 +15,7 @@ const Navbar = () => {
                     className="Info-container"
                     style={{
                         position: 'absolute',
-                        top: '-25px',
+                        top: '-40px',
                         left: '200px',
                         zIndex: 10,
                     }}
@@ -27,14 +27,11 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="Info-overview">
-                        <div className="Info-row-1">
-                            <div className="Info-text">1. Go to the Victims, Attackers, or Timeline page.</div>
-                            <div className="Info-text">3. Click a country on the map to filter by nation.</div>
+                        <div className="Info-text">1. Select the menu: victims, attackers, or timeline on top.</div>
+                        <div className="Info-text">
+                            2. Choose a year to display the list of news articles for the year.
                         </div>
-                        <div className="Info-row-2">
-                            <div className="Info-text">2. Choose a year to see data for that year.</div>
-                            <div className="Info-text">4. Select a Threat Actor for detailed attack information.</div>
-                        </div>
+                        <div className="Info-text">3. Choose a news link for a full article.</div>
                     </div>
                 </div>
                 <div className="Navbar-links">

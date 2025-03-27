@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as XLSX from 'xlsx';
 import './Timeline.css';
-import Navbar from '../components/Navbar-Timeline';
+import Navbar from '../components/Navbar';
 import DownloadIcon from '../components/svg/Download.svg';
 
 const Timeline = () => {
