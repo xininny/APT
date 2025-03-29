@@ -27,23 +27,10 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="Info-overview">
-                        <div className="Info-row-1">
-                            <div className="Info-text">1. Select a victim or an attacker from the top.</div>
-                            <div className="Info-text">2. Choose a year.</div>
-                            <div className="Info-text">3. Select a country on the map.</div>
+                        <div className="Info-text">
+                            1. Select a year to view the list of news articles for that year.
                         </div>
-                        <div
-                            className="Info-row-2"
-                            style={{
-                                position: 'absolute',
-                                top: '37px',
-                                left: '350px',
-                                width: '100%',
-                            }}
-                        >
-                            <div className="Info-text">4. Choose a threat actor under an APT.</div>
-                            <div className="Info-text">5. View the details of the APT campaign.</div>{' '}
-                        </div>
+                        <div className="Info-text">2. Click on a news link to read the full article.</div>
                     </div>
                 </div>
                 <div className="Navbar-links">
