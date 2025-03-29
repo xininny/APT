@@ -30,7 +30,7 @@ const Navbar = () => {
                         <div className="Info-text">
                             1. Select a year to view the list of news articles for that year.
                         </div>
-                        <div className="Info-text">2. Click on a news link to read the full article.</div>
+                        <div className="Info-text">2. Click on link icon to read the full article.</div>
                     </div>
                 </div>
                 <div className="Navbar-links">
