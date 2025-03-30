@@ -10,7 +10,7 @@
     justify-content: flex-start;
     box-sizing: border-box;
     margin: 48px 0px 0px 30px;
-    gap: 1360px;
+    gap: 1310px;
 }
 
 .Navbar-title {
@@ -25,18 +25,23 @@
     margin-left: 8px;
     width: 150px;
 }
-.Navbar-links {
+.Navbar-links-timeline {
     display: flex;
     align-items: center;
     gap: 32px;
 }
 
-.Navbar-links a {
+.Navbar-links-timeline a {
     text-decoration: none;
     font-size: 19px;
     color: #333d4b;
     cursor: pointer;
     font-weight: 600;
+
+    padding: 8px 8px; /* ✅ 영역 넓혀줌 */
+    border-radius: 8px; /* ✅ 둥글게 */
+    transition: background-color 0.2s ease;
+    display: inline-block; /* ✅ 패딩 적용 가능하게 */
 }
 
 .dropdown {
@@ -87,4 +92,13 @@
 .dropdown-item:hover {
     background-color: #0220470d;
     border-radius: 12px;
+}
+
+.Navbar-links-timeline a:hover {
+    background-color: #f0f0f0; /* hover 시 연한 회색 */
+}
+
+.Navbar-links-timeline a.active {
+    background-color: #d0d0d0; /* 활성화된 메뉴는 더 진한 회색 */
+    font-weight: bold;
 }

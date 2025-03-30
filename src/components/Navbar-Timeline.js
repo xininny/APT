@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import { Link, useLocation } from 'react-router-dom';
+import './Navbar-Timeline.css';
 import Logo from './svg/logo.svg';
 import InfoIcon from '../components/svg/info.svg';
 const Navbar = () => {
+    const location = useLocation(); // 현재 경로 확인
     return (
         <div className="Navbar">
             <div className="Navbar-container">
@@ -33,10 +34,17 @@ const Navbar = () => {
                         <div className="Info-text">2. Click on a link icon to read the full article.</div>
                     </div>
                 </div>
-                <div className="Navbar-links">
-                    <Link to="/victims">Victims</Link>
-                    <Link to="/attackers">Attackers</Link>
-                    <Link to="/timeline">Timeline</Link>
+                <div className="Navbar-links-timeline">
+                    <Link to="/victims" className={location.pathname === '/victims' ? 'active' : ''}>
+                        Victims
+                    </Link>
+                    <Link to="/attackers" className={['/', '/attackers'].includes(location.pathname) ? 'active' : ''}>
+                        Attackers
+                    </Link>
+
+                    <Link to="/timeline" className={location.pathname === '/timeline' ? 'active' : ''}>
+                        Timeline
+                    </Link>
                 </div>
             </div>
         </div>
