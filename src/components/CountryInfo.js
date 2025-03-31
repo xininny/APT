@@ -202,7 +202,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                             ? selectedCountry.details.filter((info) => info.zeroDay !== 'N/A' && info.zeroDay === true)
                                   .length
                             : 0}
-                        /{selectedCountry ? selectedCountry.details.filter((info) => info.zeroDay !== 'N/A').length : 0}
+                        /{selectedCountry ? selectedCountry.details.length : 0}
                     </div>
                 </div>
             </div>
