@@ -263,7 +263,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                         </div>
 
                         <div className="detail-threat-initial-row">
-                            <div className="detail-threat-initial-title">Attack Vector</div>
+                            <div className="detail-threat-initial-title">Initial Attack Vector</div>
                             <div className="detail-threat-initial-name">
                                 {selectedDetail ? selectedDetail.initialVector : ' '}
                             </div>
@@ -281,7 +281,7 @@ const CountryInfo = ({ selectedCountry, totalTimes, zeroDayTrueCount, year, setY
                             </div>
                         </div>
                         <div className="detail-threat-timeline-row">
-                            <div className="detail-threat-timeline-title">Timeline (Duration)</div>
+                            <div className="detail-threat-timeline-title">Estimated Attack Duration</div>
                             {selectedDetail ? (
                                 <div className="detail-threat-timeline-name">
                                     {(() => {
