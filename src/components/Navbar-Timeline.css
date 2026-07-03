@@ -10,7 +10,7 @@
     justify-content: flex-start;
     box-sizing: border-box;
     margin: 48px 0px 0px 30px;
-    gap: 1180px;
+    gap: 1120px;
 }
 
 .Navbar-title {
@@ -101,4 +101,18 @@
 .Navbar-links-timeline a.active {
     background-color: #d0d0d0; /* 활성화된 메뉴는 더 진한 회색 */
     font-weight: bold;
+}
+
+.navbar-github-link {
+    display: flex;
+    align-items: center;
+    color: #333d4b;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar-github-link:hover {
+    background-color: #e6e6e6d6;
+    color: #000;
 }

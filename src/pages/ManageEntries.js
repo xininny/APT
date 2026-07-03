@@ -158,11 +158,11 @@ const ManageEntries = () => {
                 const [next, ...rest] = importQueue;
                 setFormData({ ...buildEmptyEntry(columns), ...next });
                 setImportQueue(rest);
-                setPrUrl(result.prUrl || '');
+                setPrUrl(result.pr_url || '');
                 setMessage(`Pull request created. ${rest.length} entr${rest.length === 1 ? 'y' : 'ies'} remaining.`);
             } else {
                 setImportQueueTotal(0);
-                setPrUrl(result.prUrl || '');
+                setPrUrl(result.pr_url || '');
                 setMessage('Pull request created — awaiting review.');
                 setFormOpen(false);
             }
