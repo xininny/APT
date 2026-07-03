@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { APTDataContext } from '../contexts/APTDataContext';
 import Navbar from '../components/Navbar';
 import MapChart from '../components/MapChart';
@@ -8,6 +8,12 @@ const CommonAPTPage = ({ filterColumn, colorScale, selectedColor, calculateData 
     const { aptData, yearOptions } = useContext(APTDataContext);
     const [year, setYear] = useState(yearOptions.length ? Math.max(...yearOptions) : 2024);
     const [selectedCountry, setSelectedCountry] = useState(null);
+
+    useEffect(() => {
+        if (yearOptions.length && !yearOptions.includes(year)) {
+            setYear(Math.max(...yearOptions));
+        }
+    }, [yearOptions, year]);
 
     const { totalTimes, zeroDayTrueCount } = calculateData(aptData, year);
 

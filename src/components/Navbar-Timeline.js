@@ -45,6 +45,9 @@ const Navbar = () => {
                     <Link to="/timeline" className={location.pathname === '/timeline' ? 'active' : ''}>
                         Timeline
                     </Link>
+                    <Link to="/manage" className={location.pathname === '/manage' ? 'active' : ''}>
+                        Update
+                    </Link>
                 </div>
             </div>
         </div>

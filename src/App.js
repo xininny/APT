@@ -4,6 +4,7 @@ import { APTDataProvider } from './contexts/APTDataContext';
 import Attacking from './pages/Attacking';
 import Attacked from './pages/Attacked';
 import Timeline from './pages/Timeline';
+import ManageEntries from './pages/ManageEntries';
 
 function App() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/attackers" element={<Attacking />} />
                         <Route path="/" element={<Attacking />} />
                         <Route path="/timeline" element={<Timeline />} />
+                        <Route path="/manage" element={<ManageEntries />} />
                     </Routes>
                 </div>
             </Router>
