@@ -27,25 +27,37 @@ const Navbar = () => {
                             <div className="Info-Overview">Instruction</div>
                         </div>
                     </div>
-                    <div className="Info-overview">
-                        <div className="Info-row-1">
-                            <div className="Info-text">1. Select a victim or an attacker from the top.</div>
-                            <div className="Info-text">2. Choose a year.</div>
-                            <div className="Info-text">3. Select a country on the map.</div>
+                    {location.pathname === '/manage' ? (
+                        <div className="Info-overview">
+                            <div className="Info-columns">
+                                <div className="Info-text">1. Provide a report link, upload a PDF, or import JSON.</div>
+                                <div className="Info-text">2. Extracted fields pre-fill the entry form for review.</div>
+                                <div className="Info-text">3. Edit any fields, then submit to save the entry.</div>
+                                <div className="Info-text">4. Submitting opens a pull request on GitHub.</div>
+                                <div className="Info-text">5. Once approved by our team, it appears on the map.</div>
+                            </div>
                         </div>
-                        <div
-                            className="Info-row-2"
-                            style={{
-                                position: 'absolute',
-                                top: '37px',
-                                left: '350px',
-                                width: '100%',
-                            }}
-                        >
-                            <div className="Info-text">4. Choose a threat actor under an APT.</div>
-                            <div className="Info-text">5. View the details of the APT campaign.</div>{' '}
+                    ) : (
+                        <div className="Info-overview">
+                            <div className="Info-row-1">
+                                <div className="Info-text">1. Select a victim or an attacker from the top.</div>
+                                <div className="Info-text">2. Choose a year.</div>
+                                <div className="Info-text">3. Select a country on the map.</div>
+                            </div>
+                            <div
+                                className="Info-row-2"
+                                style={{
+                                    position: 'absolute',
+                                    top: '37px',
+                                    left: '350px',
+                                    width: '100%',
+                                }}
+                            >
+                                <div className="Info-text">4. Choose a threat actor under an APT.</div>
+                                <div className="Info-text">5. View the details of the APT campaign.</div>{' '}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
                 <div className="Navbar-links">
                     <a

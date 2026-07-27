@@ -26,6 +26,14 @@
     font-size: 16px;
 }
 
+.manage-disclaimer {
+    margin: -12px 0 24px;
+    color: #8b95a1;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.5;
+}
+
 .manage-actions,
 .manage-form-actions,
 .row-actions,

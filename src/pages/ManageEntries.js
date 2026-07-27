@@ -364,7 +364,7 @@ const ManageEntries = () => {
                                     <input type="text" value={formData['Source'] ?? ''} onChange={(e) => updateField('Source', e.target.value)} placeholder="e.g. Mandiant, CrowdStrike" required />
                                 </label>
                                 <label className="form-field form-field--full">
-                                    <span className="form-label">Download URL</span>
+                                    <span className="form-label">Report Link</span>
                                     <input type="text" value={formData['Download Url'] ?? ''} onChange={(e) => updateField('Download Url', e.target.value)} placeholder="https://..." required />
                                 </label>
                             </div>
@@ -765,6 +765,12 @@ const ManageEntries = () => {
                     </div>
                 </div>
 
+                <div className="manage-disclaimer">
+                    <div><strong>Notes:</strong></div>
+                    <div>- Extracting from a link or PDF requires your own API key for the model you choose.</div>
+                    <div>- Pull requests are currently opened using the maintainer's personal GitHub account.</div>
+                </div>
+
                 <section className="manage-table-section">
                     <div className="manage-table-toolbar">
                         <span>{entries.length} entries</span>
@@ -776,7 +782,7 @@ const ManageEntries = () => {
                                 <tr>
                                     <th>Date</th>
                                     <th>Source</th>
-                                    <th>Download URL</th>
+                                    <th>Report Link</th>
                                     <th>CVE</th>
                                     <th>Zero-Day</th>
                                     <th>Threat Actor</th>
