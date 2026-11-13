@@ -16,7 +16,7 @@ const Navbar = () => {
                     className="Info-container"
                     style={{
                         position: 'absolute',
-                        top: '-40px',
+                        top: '8px',
                         left: '200px',
                         zIndex: 10,
                     }}

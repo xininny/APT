@@ -1,44 +1,82 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { APTDataProvider } from './contexts/APTDataContext';
 import Attacking from './pages/Attacking';
 import Attacked from './pages/Attacked';
 import Timeline from './pages/Timeline';
 import ManageEntries from './pages/ManageEntries';
 
-function App() {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-    const [scale, setScale] = useState(1); // 배율을 설정
+// 고정 픽셀 레이아웃의 기준 캔버스 크기 (지도/타임라인 화면이 이 크기에 맞춰 디자인됨)
+const DESIGN_WIDTH = 1902;
+const DESIGN_HEIGHT = 1000;
 
-    // 화면 크기 변경 시 배율 계산
+// 스크롤 페이지(Update)는 가로 기준으로만 배율 적용
+const SCROLL_PAGES = ['/manage'];
+
+const useWindowSize = () => {
+    const [size, setSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+
     useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-            setWindowHeight(window.innerHeight);
-        };
-
+        const handleResize = () => setSize({ width: window.innerWidth, height: window.innerHeight });
         window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-        // 화면 크기 기반으로 배율 계산 (예시: 화면 크기 비례 배율 적용)
-        const calculatedScale = windowWidth / 1920; // 1920px을 기준으로 배율 계산
-        setScale(calculatedScale);
+    return size;
+};
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [windowWidth, windowHeight]);
+const ScaledLayout = ({ children }) => {
+    const location = useLocation();
+    const { width, height } = useWindowSize();
 
+    if (SCROLL_PAGES.includes(location.pathname)) {
+        return (
+            <div
+                style={{
+                    transform: `scale(${width / 1920})`,
+                    transformOrigin: 'top left',
+                    width: '100%',
+                    display: 'flow-root',
+                }}
+            >
+                {children}
+            </div>
+        );
+    }
+
+    // 화면 전체가 한 번에 보이도록 가로/세로 중 더 작은 비율로 맞추고 가운데 정렬
+    const scale = Math.min(width / DESIGN_WIDTH, height / DESIGN_HEIGHT);
+
+    return (
+        <div
+            style={{
+                width: DESIGN_WIDTH * scale,
+                height: DESIGN_HEIGHT * scale,
+                margin: '0 auto',
+                overflow: 'hidden',
+            }}
+        >
+            <div
+                style={{
+                    width: DESIGN_WIDTH,
+                    height: DESIGN_HEIGHT,
+                    position: 'relative',
+                    display: 'flow-root', // 자식의 margin이 배율 밖으로 새지 않도록 (margin collapse 방지)
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'top left',
+                }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+};
+
+function App() {
     return (
         <APTDataProvider>
             <Router>
-                <div
-                    style={{
-                        transform: `scale(${scale})`, // 배율 적용
-                        transformOrigin: 'top left', // 배율이 왼쪽 상단을 기준으로 적용되도록
-                        width: '100%', // 페이지 레이아웃 깨지지 않도록 설정
-                    }}
-                >
+                <ScaledLayout>
                     <Routes>
                         <Route path="/victims" element={<Attacked />} />
                         <Route path="/attackers" element={<Attacking />} />
@@ -46,7 +84,7 @@ function App() {
                         <Route path="/timeline" element={<Timeline />} />
                         <Route path="/manage" element={<ManageEntries />} />
                     </Routes>
-                </div>
+                </ScaledLayout>
             </Router>
         </APTDataProvider>
     );
